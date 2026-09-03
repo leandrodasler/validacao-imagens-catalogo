@@ -205,8 +205,106 @@
     </div>
 
     <script>
+        // Mapa de extensões das imagens (categoria -> extensão)
+        const IMAGE_EXTENSIONS = {
+            "2": "jpg",
+            "7": "jpg",
+            "9": "jpg",
+            "12": "png",
+            "14": "jpg",
+            "16": "jpg",
+            "18": "jpg",
+            "20": "gif",
+            "23": "jpg",
+            "24": "jpg",
+            "25": "jpg",
+            "27": "jpg",
+            "28": "jpg",
+            "29": "jpg",
+            "30": "jpg",
+            "31": "jpg",
+            "33": "jpg",
+            "34": "jpg",
+            "35": "webp",
+            "36": "jpg",
+            "39": "jpg",
+            "43": "jpg",
+            "45": "jpg",
+            "47": "jpg",
+            "49": "jpg",
+            "51": "jpg",
+            "52": "jpg",
+            "54": "jpg",
+            "56": "jpg",
+            "59": "jpg",
+            "61": "jpg",
+            "63": "jpg",
+            "65": "jpg",
+            "66": "jpg",
+            "68": "jpg",
+            "70": "jpg",
+            "72": "jpg",
+            "74": "jpg",
+            "76": "jpg",
+            "79": "jpg",
+            "81": "jpg",
+            "83": "jpg",
+            "85": "jpg",
+            "87": "jpg",
+            "89": "jpg",
+            "91": "jpg",
+            "92": "jpg",
+            "94": "png",
+            "95": "jpg",
+            "98": "jpg",
+            "100": "jpg",
+            "104": "jpg",
+            "106": "jpg",
+            "107": "jpg",
+            "108": "jpg",
+            "110": "jpg",
+            "112": "jpg",
+            "114": "jpg",
+            "117": "jpg",
+            "119": "webp",
+            "121": "png",
+            "122": "jpg",
+            "124": "jpg",
+            "126": "jpg",
+            "128": "jpg",
+            "130": "png",
+            "131": "jpg",
+            "133": "png",
+            "136": "jpg",
+            "138": "jpg",
+            "139": "jpg",
+            "141": "jpg",
+            "143": "jpg",
+            "145": "jpg",
+            "147": "jpg",
+            "148": "jpg",
+            "150": "jpg",
+            "152": "jpg",
+            "155": "jpg",
+            "157": "jpg",
+            "159": "jpg",
+            "161": "jpg",
+            "164": "jpg",
+            "166": "jpg",
+            "168": "jpg",
+            "171": "jpg",
+            "173": "jpg",
+            "176": "jpg",
+            "178": "jpg",
+            "181": "jpg",
+            "185": "png",
+            "186": "jpg",
+            "188": "jpg",
+            "190": "jpg",
+        };
+
         // Dados dos produtos (categoria, nome)
-        const products = [
+        const allProducts = [
             { category: "2", name: "3/8\"-16 x 2-1/2\" Grade 5 Zinc Finish Hex Cap Screw" },
             { category: "7", name: "Safety Glasses, Clear Lens, Anti-Fog, Wraparound" },
             { category: "9", name: "Nitrile Disposable Gloves, Powder-Free, Large, 100/Box" },
@@ -288,7 +386,6 @@
             { category: "150", name: "V-Belt, A-Section 1/2\" Wide" },
             { category: "152", name: "Chain Drive, #40 Roller" },
             { category: "155", name: "Shaft Coupling, Flex 1-1/2\"" },
-            { category: "155", name: "Fluorescent Bulb, T8 4ft 40W" },
             { category: "157", name: "LED Bulb, A19 60W Equivalent" },
             { category: "159", name: "Lamp Socket, Medium Base" },
             { category: "161", name: "Grinding Wheel, 4-1/2\" Depressed" },
@@ -306,6 +403,9 @@
             { category: "188", name: "Work Gloves, Leather Palm" },
             { category: "190", name: "Welding Helmet, Auto Darkening" },
         ];
+
+        // Filtrar apenas produtos que têm imagens
+        const products = allProducts.filter(p => IMAGE_EXTENSIONS[p.category]);
 
         const gallery = document.getElementById('gallery');
         const filterInput = document.getElementById('categoryFilter');
@@ -330,7 +430,8 @@
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                const imgPath = `images/img_${product.category}.jpg`;
+                const ext = IMAGE_EXTENSIONS[product.category];
+                const imgPath = `images/img_${product.category}.${ext}`;
 
                 card.innerHTML = `
                     <div class="card-image-wrapper">
