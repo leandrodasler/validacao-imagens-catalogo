@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validação de Imagens — Catálogo</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f4f5f7; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1c2430; }
+  header { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid #e2e5ea; padding: 14px 24px; display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+  header h1 { font-size: 17px; margin: 0; font-weight: 650; }
+  header .count { color: #667085; font-size: 13px; }
+  header input { margin-left: auto; padding: 7px 12px; border: 1px solid #d5d9e0; border-radius: 8px; font-size: 13px; width: 260px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; padding: 20px 24px 40px; }
+  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .imgwrap { height: 190px; display: flex; align-items: center; justify-content: center; background: #fff; border-bottom: 1px solid #eef0f3; position: relative; }
+  .imgwrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .imgwrap.broken img { display: none; }
+  .brokenmsg { display: none; color: #b42318; font-size: 12px; font-weight: 600; }
+  .imgwrap.broken .brokenmsg { display: block; }
+  .imgwrap.broken { background: #fef3f2; }
+  .meta { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 5px; }
+  .rowtag { font-size: 11px; font-weight: 700; color: #475467; background: #f0f2f5; border-radius: 5px; padding: 2px 7px; align-self: flex-start; letter-spacing: .02em; }
+  .pname { font-size: 13px; font-weight: 600; line-height: 1.35; }
+  .purl { font-size: 10.5px; color: #6b7788; text-decoration: none; word-break: break-all; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .purl:hover { color: #2255cc; text-decoration: underline; }
+  .hide { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Validação de imagens do catálogo</h1>
+  <span class="count" id="count">99 produtos</span>
+  <input id="q" type="search" placeholder="Filtrar por nome, linha ou categoria…">
+</header>
+<div class="grid" id="grid">
+<div class="card" id="row2">
+  <div class="imgwrap"><img src="https://contentinfo.autozone.com/znetcs/product-info/en/US/avp/5469/image/8/" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 2 · Cat 2</div>
+    <div class="pname">3/8&quot;-16 x 2-1/2&quot; Grade 5 Zinc Finish Hex Cap Screw</div>
+    <a class="purl" href="https://contentinfo.autozone.com/znetcs/product-info/en/US/avp/5469/image/8/" target="_blank" rel="noopener">https://contentinfo.autozone.com/znetcs/product-info/en/US/avp/5469/image/8/</a>
+  </div>
+</div>
+<div class="card" id="row3">
+  <div class="imgwrap"><img src="https://static-content.cromwell.co.uk/images/854_854/g/jeeps/960/ctl9600111m.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 3 · Cat 7</div>
+    <div class="pname">Safety Glasses, Clear Lens, Anti-Fog, Wraparound</div>
+    <a class="purl" href="https://static-content.cromwell.co.uk/images/854_854/g/jeeps/960/ctl9600111m.jpg" target="_blank" rel="noopener">https://static-content.cromwell.co.uk/images/854_854/g/jeeps/960/ctl9600111m.jpg</a>
+  </div>
+</div>
+<div class="card" id="row4">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Supmedic-Blue-Nitrile-Exam-Gloves-5-mil-Powder-Free-Latex-Free-Food-Safe-Disposable-Medical-Glove-100-Pcs-Large_31c409b2-8318-41e7-8788-466f2f83b53a.168caccd2b25f80254c8cd03e31a775d.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 4 · Cat 9</div>
+    <div class="pname">Nitrile Disposable Gloves, Powder-Free, Large, 100/Box</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Supmedic-Blue-Nitrile-Exam-Gloves-5-mil-Powder-Free-Latex-Free-Food-Safe-Disposable-Medical-Glove-100-Pcs-Large_31c409b2-8318-41e7-8788-466f2f83b53a.168caccd2b25f80254c8cd03e31a775d.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Supmedic-Blue-Nitrile-Exam-Gloves-5-mil-Powder-Free-Latex-Free-Food-Safe-Disposable-Medical-Glove-100-Pcs-Large_31c409b2-8318-41e7-8788-466f2f83b53a.168caccd2b25f80254c8cd03e31a775d.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row5">
+  <div class="imgwrap"><img src="https://static.wixstatic.com/media/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png/v1/fill/w_500,h_500,al_c,q_85,enc_auto/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 5 · Cat 12</div>
+    <div class="pname">N95 Disposable Respirator, Cup Style, 20/Box</div>
+    <a class="purl" href="https://static.wixstatic.com/media/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png/v1/fill/w_500,h_500,al_c,q_85,enc_auto/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png" target="_blank" rel="noopener">https://static.wixstatic.com/media/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png/v1/fill/w_500,h_500,al_c,q_85,enc_auto/133823_0cd2dbe2718e4d5bbf45c50c0536a196~mv2.png</a>
+  </div>
+</div>
+<div class="card" id="row6">
+  <div class="imgwrap"><img src="https://wcsafety.com/cdn/shop/files/3m-peltor-optime-98-h9a-earmuffs-nrr-25-over-the-h_800x.jpg?v=1782295626" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 6 · Cat 14</div>
+    <div class="pname">Hearing Protection Earmuffs, Over-the-Head, NRR 25</div>
+    <a class="purl" href="https://wcsafety.com/cdn/shop/files/3m-peltor-optime-98-h9a-earmuffs-nrr-25-over-the-h_800x.jpg?v=1782295626" target="_blank" rel="noopener">https://wcsafety.com/cdn/shop/files/3m-peltor-optime-98-h9a-earmuffs-nrr-25-over-the-h_800x.jpg?v=1782295626</a>
+  </div>
+</div>
+<div class="card" id="row7">
+  <div class="imgwrap"><img src="https://img.uline.com/is/image/uline/S-21682G-L_US?$LargeRHD$" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 7 · Cat 16</div>
+    <div class="pname">High-Visibility Vest, Class 2, Lime, Large</div>
+    <a class="purl" href="https://img.uline.com/is/image/uline/S-21682G-L_US?$LargeRHD$" target="_blank" rel="noopener">https://img.uline.com/is/image/uline/S-21682G-L_US?$LargeRHD$</a>
+  </div>
+</div>
+<div class="card" id="row8">
+  <div class="imgwrap"><img src="https://hoffmanboots.com/cdn/shop/files/2008-09-09_12.12.01.jpg?v=1775582114&amp;width=1946" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 8 · Cat 18</div>
+    <div class="pname">Steel Toe Work Boots, EH Rated, Size 10</div>
+    <a class="purl" href="https://hoffmanboots.com/cdn/shop/files/2008-09-09_12.12.01.jpg?v=1775582114&width=1946" target="_blank" rel="noopener">https://hoffmanboots.com/cdn/shop/files/2008-09-09_12.12.01.jpg?v=1775582114&amp;width=1946</a>
+  </div>
+</div>
+<div class="card" id="row9">
+  <div class="imgwrap"><img src="https://images.globalindustrial.com/images/co/761290IN_1wco.gif?t=1664286141901" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 9 · Cat 20</div>
+    <div class="pname">First Aid Kit, Industrial, 50 Person, Metal Case</div>
+    <a class="purl" href="https://images.globalindustrial.com/images/co/761290IN_1wco.gif?t=1664286141901" target="_blank" rel="noopener">https://images.globalindustrial.com/images/co/761290IN_1wco.gif?t=1664286141901</a>
+  </div>
+</div>
+<div class="card" id="row10">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/product/converted/820909/820909502173.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 10 · Cat 23</div>
+    <div class="pname">Adjustable Wrench, 12 in, Chrome Vanadium</div>
+    <a class="purl" href="https://mobileimages.lowes.com/product/converted/820909/820909502173.jpg" target="_blank" rel="noopener">https://mobileimages.lowes.com/product/converted/820909/820909502173.jpg</a>
+  </div>
+</div>
+<div class="card" id="row11">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Craftsman-8-Piece-Assorted-Screwdriver-Set_43a7bf24-c62e-4925-991a-f32dd613e7e0.d0b2de67227b35ebffa7a4417654f8ce.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 11 · Cat 24</div>
+    <div class="pname">Screwdriver Set, Assorted, 8-Piece</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Craftsman-8-Piece-Assorted-Screwdriver-Set_43a7bf24-c62e-4925-991a-f32dd613e7e0.d0b2de67227b35ebffa7a4417654f8ce.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Craftsman-8-Piece-Assorted-Screwdriver-Set_43a7bf24-c62e-4925-991a-f32dd613e7e0.d0b2de67227b35ebffa7a4417654f8ce.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF</a>
+  </div>
+</div>
+<div class="card" id="row12">
+  <div class="imgwrap"><img src="https://2e1293630802db8d0d56-50fcdb1c10e3e49a3d1b0541a2f13b69.ssl.cf1.rackcdn.com/product/images/f34aa598939141a09445d37f170b8330.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 12 · Cat 25</div>
+    <div class="pname">Tongue and Groove Pliers, 10 in</div>
+    <a class="purl" href="https://2e1293630802db8d0d56-50fcdb1c10e3e49a3d1b0541a2f13b69.ssl.cf1.rackcdn.com/product/images/f34aa598939141a09445d37f170b8330.jpg" target="_blank" rel="noopener">https://2e1293630802db8d0d56-50fcdb1c10e3e49a3d1b0541a2f13b69.ssl.cf1.rackcdn.com/product/images/f34aa598939141a09445d37f170b8330.jpg</a>
+  </div>
+</div>
+<div class="card" id="row13">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Deli-10-inch-Curved-Jaw-Locking-Pliers-Vice-Grips-Plier-with-Wire-Cutter-Locking-Adjustable-Vise-Grips-for-Clamping-Twisting-Welding_2c3461b8-1711-41e3-b479-fba3a6a3834d.e21b6f6dd6015498ba5029dde66c4df9.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 13 · Cat 25</div>
+    <div class="pname">Locking Pliers, Curved Jaw, 10 in</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Deli-10-inch-Curved-Jaw-Locking-Pliers-Vice-Grips-Plier-with-Wire-Cutter-Locking-Adjustable-Vise-Grips-for-Clamping-Twisting-Welding_2c3461b8-1711-41e3-b479-fba3a6a3834d.e21b6f6dd6015498ba5029dde66c4df9.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Deli-10-inch-Curved-Jaw-Locking-Pliers-Vice-Grips-Plier-with-Wire-Cutter-Locking-Adjustable-Vise-Grips-for-Clamping-Twisting-Welding_2c3461b8-1711-41e3-b479-fba3a6a3834d.e21b6f6dd6015498ba5029dde66c4df9.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row14">
+  <div class="imgwrap"><img src="https://media-www.canadiantire.ca/product/fixing/tools/cutting-measuring/0577165/fatmax-25-magnetic-tip-tape-a3ae92c1-76c7-4dad-b5f0-8e3e1c683599-jpgrendition.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 14 · Cat 27</div>
+    <div class="pname">Tape Measure, 25 ft, Magnetic Tip</div>
+    <a class="purl" href="https://media-www.canadiantire.ca/product/fixing/tools/cutting-measuring/0577165/fatmax-25-magnetic-tip-tape-a3ae92c1-76c7-4dad-b5f0-8e3e1c683599-jpgrendition.jpg" target="_blank" rel="noopener">https://media-www.canadiantire.ca/product/fixing/tools/cutting-measuring/0577165/fatmax-25-magnetic-tip-tape-a3ae92c1-76c7-4dad-b5f0-8e3e1c683599-jpgrendition.jpg</a>
+  </div>
+</div>
+<div class="card" id="row15">
+  <div class="imgwrap"><img src="https://cdn11.bigcommerce.com/s-l73l7lwqjy/images/stencil/1280x1280/products/1320/8198/digital_caliper7__28099.1675286157.jpg?c=2&amp;imbypass=on" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 15 · Cat 28</div>
+    <div class="pname">Digital Caliper, 0-6 in, Stainless Steel</div>
+    <a class="purl" href="https://cdn11.bigcommerce.com/s-l73l7lwqjy/images/stencil/1280x1280/products/1320/8198/digital_caliper7__28099.1675286157.jpg?c=2&imbypass=on" target="_blank" rel="noopener">https://cdn11.bigcommerce.com/s-l73l7lwqjy/images/stencil/1280x1280/products/1320/8198/digital_caliper7__28099.1675286157.jpg?c=2&amp;imbypass=on</a>
+  </div>
+</div>
+<div class="card" id="row16">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Hyper-Tough-16-Ounce-Claw-Hammer-with-Fiberglass-Handle_e0d866aa-7cd2-4d51-ad90-ce9a7e22eb88_1.58cc82e01710cb54ba43045117563858.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 16 · Cat 29</div>
+    <div class="pname">Claw Hammer, 16 oz, Fiberglass Handle</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Hyper-Tough-16-Ounce-Claw-Hammer-with-Fiberglass-Handle_e0d866aa-7cd2-4d51-ad90-ce9a7e22eb88_1.58cc82e01710cb54ba43045117563858.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Hyper-Tough-16-Ounce-Claw-Hammer-with-Fiberglass-Handle_e0d866aa-7cd2-4d51-ad90-ce9a7e22eb88_1.58cc82e01710cb54ba43045117563858.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row17">
+  <div class="imgwrap"><img src="https://microless.com/cdn/products/9d59b0223728d5c0ec5e3a7045123071-hi.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 17 · Cat 30</div>
+    <div class="pname">Utility Knife, Retractable Blade, Metal Body</div>
+    <a class="purl" href="https://microless.com/cdn/products/9d59b0223728d5c0ec5e3a7045123071-hi.jpg" target="_blank" rel="noopener">https://microless.com/cdn/products/9d59b0223728d5c0ec5e3a7045123071-hi.jpg</a>
+  </div>
+</div>
+<div class="card" id="row18">
+  <div class="imgwrap"><img src="https://www.kleintools.com/sites/default/files/product-assets/catalog-imagery/original/klein/ls12_bls12_locked_alt1.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 18 · Cat 31</div>
+    <div class="pname">Hex Key Set, SAE/Metric, 22-Piece</div>
+    <a class="purl" href="https://www.kleintools.com/sites/default/files/product-assets/catalog-imagery/original/klein/ls12_bls12_locked_alt1.jpg" target="_blank" rel="noopener">https://www.kleintools.com/sites/default/files/product-assets/catalog-imagery/original/klein/ls12_bls12_locked_alt1.jpg</a>
+  </div>
+</div>
+<div class="card" id="row19">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/717HkNqIFCL.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 19 · Cat 33</div>
+    <div class="pname">Cordless Drill/Driver Kit, 20V, 1/2 in Chuck</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/717HkNqIFCL.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/717HkNqIFCL.jpg</a>
+  </div>
+</div>
+<div class="card" id="row20">
+  <div class="imgwrap"><img src="https://www.toolhavenusa.com/wp-content/uploads/2025/08/8400349036696_710026.webp" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 20 · Cat 34</div>
+    <div class="pname">Angle Grinder, 4-1/2 in, 11 Amp</div>
+    <a class="purl" href="https://www.toolhavenusa.com/wp-content/uploads/2025/08/8400349036696_710026.webp" target="_blank" rel="noopener">https://www.toolhavenusa.com/wp-content/uploads/2025/08/8400349036696_710026.webp</a>
+  </div>
+</div>
+<div class="card" id="row21">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/SKIL-SPT77W-01-15-Amp-7-1-4-Aluminum-Corded-Electric-Worm-Drive-Circular-Saw_e5ba1bd4-d126-4e99-bfe7-77becf12084d_1.9d47e6060ac4a4b9c3b4c4e0253bed55.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 21 · Cat 35</div>
+    <div class="pname">Circular Saw, 7-1/4 in, Corded</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/SKIL-SPT77W-01-15-Amp-7-1-4-Aluminum-Corded-Electric-Worm-Drive-Circular-Saw_e5ba1bd4-d126-4e99-bfe7-77becf12084d_1.9d47e6060ac4a4b9c3b4c4e0253bed55.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/SKIL-SPT77W-01-15-Amp-7-1-4-Aluminum-Corded-Electric-Worm-Drive-Circular-Saw_e5ba1bd4-d126-4e99-bfe7-77becf12084d_1.9d47e6060ac4a4b9c3b4c4e0253bed55.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row22">
+  <div class="imgwrap"><img src="https://i5.walmartimages.ca/images/Enlarge/422/058/1422058.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 22 · Cat 36</div>
+    <div class="pname">Impact Driver Kit, 18V, Hex Chuck</div>
+    <a class="purl" href="https://i5.walmartimages.ca/images/Enlarge/422/058/1422058.jpg" target="_blank" rel="noopener">https://i5.walmartimages.ca/images/Enlarge/422/058/1422058.jpg</a>
+  </div>
+</div>
+<div class="card" id="row23">
+  <div class="imgwrap"><img src="https://0295-cdn.dib-moce-cdn.info/Data/ItemImage-501980-q5w87j-870zpk-5l5tsg.jpg?AutoCrop=1&amp;CropHeight=1440&amp;CropWidth=1440&amp;Height=1440&amp;Padding=1&amp;Quality=50&amp;Resize=Auto&amp;Revision=g4CG&amp;Timestamp=g9dsFG&amp;Width=1440" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 23 · Cat 39</div>
+    <div class="pname">THHN Wire, 12 AWG, Black, 500 ft Spool</div>
+    <a class="purl" href="https://0295-cdn.dib-moce-cdn.info/Data/ItemImage-501980-q5w87j-870zpk-5l5tsg.jpg?AutoCrop=1&CropHeight=1440&CropWidth=1440&Height=1440&Padding=1&Quality=50&Resize=Auto&Revision=g4CG&Timestamp=g9dsFG&Width=1440" target="_blank" rel="noopener">https://0295-cdn.dib-moce-cdn.info/Data/ItemImage-501980-q5w87j-870zpk-5l5tsg.jpg?AutoCrop=1&amp;CropHeight=1440&amp;CropWidth=1440&amp;Height=1440&amp;Padding=1&amp;Quality=50&amp;Resize=Auto&amp;Revision=g4CG&amp;Timestamp=g9dsFG&amp;Width=1440</a>
+  </div>
+</div>
+<div class="card" id="row24">
+  <div class="imgwrap"><img src="https://cdn.mscdirect.com/global/images/ProductImages/9721370-21.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 24 · Cat 41</div>
+    <div class="pname">Circuit Breaker, 20A, Single Pole, 120/240V</div>
+    <a class="purl" href="https://cdn.mscdirect.com/global/images/ProductImages/9721370-21.jpg" target="_blank" rel="noopener">https://cdn.mscdirect.com/global/images/ProductImages/9721370-21.jpg</a>
+  </div>
+</div>
+<div class="card" id="row25">
+  <div class="imgwrap"><img src="https://www.resllcstore.com/cdn/shop/files/IMG_0005-Photoroom_390a9b4f-d1cd-4270-96dd-7b2974561b45.jpg?v=1731021881&amp;width=1445" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 25 · Cat 43</div>
+    <div class="pname">GFCI Duplex Receptacle, 15A, 125V, White</div>
+    <a class="purl" href="https://www.resllcstore.com/cdn/shop/files/IMG_0005-Photoroom_390a9b4f-d1cd-4270-96dd-7b2974561b45.jpg?v=1731021881&width=1445" target="_blank" rel="noopener">https://www.resllcstore.com/cdn/shop/files/IMG_0005-Photoroom_390a9b4f-d1cd-4270-96dd-7b2974561b45.jpg?v=1731021881&amp;width=1445</a>
+  </div>
+</div>
+<div class="card" id="row26">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/4-Pack-LED-Shop-Light-for-Garage-4ft-Linkable-5000K-Daylight-40W-Surface-Mount-Suspended-Mount_852a2840-198e-4814-977e-e3df5c317e46.983d99433ab2288edfed56325e6ac236.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 26 · Cat 45</div>
+    <div class="pname">LED Shop Light, 4 ft, 40W, 5000K</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/4-Pack-LED-Shop-Light-for-Garage-4ft-Linkable-5000K-Daylight-40W-Surface-Mount-Suspended-Mount_852a2840-198e-4814-977e-e3df5c317e46.983d99433ab2288edfed56325e6ac236.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/4-Pack-LED-Shop-Light-for-Garage-4ft-Linkable-5000K-Daylight-40W-Surface-Mount-Suspended-Mount_852a2840-198e-4814-977e-e3df5c317e46.983d99433ab2288edfed56325e6ac236.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row27">
+  <div class="imgwrap"><img src="https://zuniposimages.blob.core.windows.net/posimages/17190_000_001.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 27 · Cat 47</div>
+    <div class="pname">Conduit, EMT, 3/4 in x 10 ft</div>
+    <a class="purl" href="https://zuniposimages.blob.core.windows.net/posimages/17190_000_001.jpg" target="_blank" rel="noopener">https://zuniposimages.blob.core.windows.net/posimages/17190_000_001.jpg</a>
+  </div>
+</div>
+<div class="card" id="row28">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/81Gvp15P4FL.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 28 · Cat 49</div>
+    <div class="pname">Wire Nuts, Assorted Colors, 100-Pack</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/81Gvp15P4FL.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/81Gvp15P4FL.jpg</a>
+  </div>
+</div>
+<div class="card" id="row29">
+  <div class="imgwrap"><img src="https://images-na.ssl-images-amazon.com/images/I/71oomjybNyL.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 29 · Cat 51</div>
+    <div class="pname">Extension Cord, 50 ft, 12/3, SJTW, Yellow</div>
+    <a class="purl" href="https://images-na.ssl-images-amazon.com/images/I/71oomjybNyL.jpg" target="_blank" rel="noopener">https://images-na.ssl-images-amazon.com/images/I/71oomjybNyL.jpg</a>
+  </div>
+</div>
+<div class="card" id="row30">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/ENERLITES-20-Amp-Heavy-Duty-Toggle-Light-Switch-Single-Pole-20A-120-277V-Grounding-Screw-Commercial-Grade-UL-Listed-81201-W-White_1efeeea4-3ba6-4429-b6e4-467d411bce0c.076d8e9e0585d38259283be852f942e7.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 30 · Cat 52</div>
+    <div class="pname">Toggle Switch, Single Pole, 20A, 120/277V</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/ENERLITES-20-Amp-Heavy-Duty-Toggle-Light-Switch-Single-Pole-20A-120-277V-Grounding-Screw-Commercial-Grade-UL-Listed-81201-W-White_1efeeea4-3ba6-4429-b6e4-467d411bce0c.076d8e9e0585d38259283be852f942e7.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/ENERLITES-20-Amp-Heavy-Duty-Toggle-Light-Switch-Single-Pole-20A-120-277V-Grounding-Screw-Commercial-Grade-UL-Listed-81201-W-White_1efeeea4-3ba6-4429-b6e4-467d411bce0c.076d8e9e0585d38259283be852f942e7.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF</a>
+  </div>
+</div>
+<div class="card" id="row31">
+  <div class="imgwrap"><img src="https://assets.wfcdn.com/im/03269543/compr-r85/3793/379303615/Red+Letter+Led+Exit+Sign+With+Battery+Backup%2C+Two+Adjustable+Heads+Emergency+Lights.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 31 · Cat 54</div>
+    <div class="pname">LED Exit Sign, Red Letters, Battery Backup</div>
+    <a class="purl" href="https://assets.wfcdn.com/im/03269543/compr-r85/3793/379303615/Red+Letter+Led+Exit+Sign+With+Battery+Backup%2C+Two+Adjustable+Heads+Emergency+Lights.jpg" target="_blank" rel="noopener">https://assets.wfcdn.com/im/03269543/compr-r85/3793/379303615/Red+Letter+Led+Exit+Sign+With+Battery+Backup%2C+Two+Adjustable+Heads+Emergency+Lights.jpg</a>
+  </div>
+</div>
+<div class="card" id="row32">
+  <div class="imgwrap"><img src="https://cdn.amplifi.pattern.com/4622c276-eb22-4aa7-b1dc-b2073fdc9d0e_medium.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 32 · Cat 56</div>
+    <div class="pname">Cable Ties, 8 in, Natural, 1000/Pack</div>
+    <a class="purl" href="https://cdn.amplifi.pattern.com/4622c276-eb22-4aa7-b1dc-b2073fdc9d0e_medium.jpg" target="_blank" rel="noopener">https://cdn.amplifi.pattern.com/4622c276-eb22-4aa7-b1dc-b2073fdc9d0e_medium.jpg</a>
+  </div>
+</div>
+<div class="card" id="row33">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/61lHUJkwt7L._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 33 · Cat 59</div>
+    <div class="pname">Ball Valve, Brass, 3/4 in NPT, Full Port</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/61lHUJkwt7L._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/61lHUJkwt7L._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row34">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/productimages/a01c842a-c570-45be-ad8f-490cfc1185c8/67585337.jpeg?size=pdhism" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 34 · Cat 61</div>
+    <div class="pname">PVC Pipe, Schedule 40, 1 in x 10 ft</div>
+    <a class="purl" href="https://mobileimages.lowes.com/productimages/a01c842a-c570-45be-ad8f-490cfc1185c8/67585337.jpeg?size=pdhism" target="_blank" rel="noopener">https://mobileimages.lowes.com/productimages/a01c842a-c570-45be-ad8f-490cfc1185c8/67585337.jpeg?size=pdhism</a>
+  </div>
+</div>
+<div class="card" id="row35">
+  <div class="imgwrap"><img src="https://store.ottawatoollibrary.com/wp-content/uploads/2024/03/240302-06.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 35 · Cat 63</div>
+    <div class="pname">Pipe Wrench, 18 in, Cast Iron</div>
+    <a class="purl" href="https://store.ottawatoollibrary.com/wp-content/uploads/2024/03/240302-06.jpg" target="_blank" rel="noopener">https://store.ottawatoollibrary.com/wp-content/uploads/2024/03/240302-06.jpg</a>
+  </div>
+</div>
+<div class="card" id="row36">
+  <div class="imgwrap"><img src="https://www.multifunctiontools.com/wp-content/uploads/2024/11/65151690-scaled.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 36 · Cat 65</div>
+    <div class="pname">P-Trap, PVC, 1-1/2 in</div>
+    <a class="purl" href="https://www.multifunctiontools.com/wp-content/uploads/2024/11/65151690-scaled.jpg" target="_blank" rel="noopener">https://www.multifunctiontools.com/wp-content/uploads/2024/11/65151690-scaled.jpg</a>
+  </div>
+</div>
+<div class="card" id="row37">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/productimages/ce424fab-5dee-44ed-8fa1-3474c2aef646/48423962.jpg?size=pdhism" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 37 · Cat 66</div>
+    <div class="pname">SharkBite Coupling, Push-to-Connect, 1/2 in</div>
+    <a class="purl" href="https://mobileimages.lowes.com/productimages/ce424fab-5dee-44ed-8fa1-3474c2aef646/48423962.jpg?size=pdhism" target="_blank" rel="noopener">https://mobileimages.lowes.com/productimages/ce424fab-5dee-44ed-8fa1-3474c2aef646/48423962.jpg?size=pdhism</a>
+  </div>
+</div>
+<div class="card" id="row38">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Gas-Line-Ptfe-Thread-Sealant-Tape-1-2-In-X-260-In-Yellow-Full-Density-Bundle-of-2-Rolls_c5add9a5-596e-4c0b-833b-7b06a7a6a724.5f53e90edc3f2734c1712a091604de90.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 38 · Cat 68</div>
+    <div class="pname">Pipe Thread Sealant Tape, PTFE, 1/2 in x 260 in</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Gas-Line-Ptfe-Thread-Sealant-Tape-1-2-In-X-260-In-Yellow-Full-Density-Bundle-of-2-Rolls_c5add9a5-596e-4c0b-833b-7b06a7a6a724.5f53e90edc3f2734c1712a091604de90.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Gas-Line-Ptfe-Thread-Sealant-Tape-1-2-In-X-260-In-Yellow-Full-Density-Bundle-of-2-Rolls_c5add9a5-596e-4c0b-833b-7b06a7a6a724.5f53e90edc3f2734c1712a091604de90.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF</a>
+  </div>
+</div>
+<div class="card" id="row39">
+  <div class="imgwrap"><img src="https://voomisupply.com/cdn/shop/files/71iSAyYDtOL._AC_SL1500.jpg?v=1722742369" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 39 · Cat 70</div>
+    <div class="pname">Water Heater Element, 4500W, 240V</div>
+    <a class="purl" href="https://voomisupply.com/cdn/shop/files/71iSAyYDtOL._AC_SL1500.jpg?v=1722742369" target="_blank" rel="noopener">https://voomisupply.com/cdn/shop/files/71iSAyYDtOL._AC_SL1500.jpg?v=1722742369</a>
+  </div>
+</div>
+<div class="card" id="row40">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/productimages/f2aae846-6dd5-44eb-b08d-1ff859b10348/05215073.jpg?size=pdhism" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 40 · Cat 72</div>
+    <div class="pname">Toilet Supply Line, Braided Stainless, 12 in</div>
+    <a class="purl" href="https://mobileimages.lowes.com/productimages/f2aae846-6dd5-44eb-b08d-1ff859b10348/05215073.jpg?size=pdhism" target="_blank" rel="noopener">https://mobileimages.lowes.com/productimages/f2aae846-6dd5-44eb-b08d-1ff859b10348/05215073.jpg?size=pdhism</a>
+  </div>
+</div>
+<div class="card" id="row41">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/61HNCsETkqL._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 41 · Cat 74</div>
+    <div class="pname">Sump Pump, Submersible, 1/3 HP</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/61HNCsETkqL._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/61HNCsETkqL._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row42">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Uxcell-3Pcs-3-4-19mm-ID-x-6Ft-Pipe-Insulation-Foam-Tube_4ad91354-e419-4ab5-8c15-45894ae52c26.1660dceac5a4e34e044a96bdf6457a76.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 42 · Cat 76</div>
+    <div class="pname">Pipe Insulation, Foam, 3/4 in ID x 6 ft</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Uxcell-3Pcs-3-4-19mm-ID-x-6Ft-Pipe-Insulation-Foam-Tube_4ad91354-e419-4ab5-8c15-45894ae52c26.1660dceac5a4e34e044a96bdf6457a76.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Uxcell-3Pcs-3-4-19mm-ID-x-6Ft-Pipe-Insulation-Foam-Tube_4ad91354-e419-4ab5-8c15-45894ae52c26.1660dceac5a4e34e044a96bdf6457a76.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row43">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/71Wo+cp08DL._AC_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 43 · Cat 79</div>
+    <div class="pname">Air Filter, MERV 8, 16x25x1, 12-Pack</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/71Wo+cp08DL._AC_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/71Wo+cp08DL._AC_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row44">
+  <div class="imgwrap"><img src="https://haste-uae.com/wp-content/uploads/2026/02/ID340420204788-0102_preview.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 44 · Cat 81</div>
+    <div class="pname">Thermostatic Expansion Valve, R-410A</div>
+    <a class="purl" href="https://haste-uae.com/wp-content/uploads/2026/02/ID340420204788-0102_preview.jpg" target="_blank" rel="noopener">https://haste-uae.com/wp-content/uploads/2026/02/ID340420204788-0102_preview.jpg</a>
+  </div>
+</div>
+<div class="card" id="row45">
+  <div class="imgwrap"><img src="https://jacksonsystems.com/wp-content/uploads/2026/03/PRCD405A_anglefront-1-scaled.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 45 · Cat 83</div>
+    <div class="pname">Capacitor, Dual Run, 40/5 MFD, 370V</div>
+    <a class="purl" href="https://jacksonsystems.com/wp-content/uploads/2026/03/PRCD405A_anglefront-1-scaled.jpg" target="_blank" rel="noopener">https://jacksonsystems.com/wp-content/uploads/2026/03/PRCD405A_anglefront-1-scaled.jpg</a>
+  </div>
+</div>
+<div class="card" id="row46">
+  <div class="imgwrap"><img src="https://img.vevorstatic.com/us/LNSPCBYC150GPPQCEV1/original_img-v1/condensate-pump-m100-12.jpg?timestamp=1686794734000&amp;format=webp&amp;format=webp" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 46 · Cat 85</div>
+    <div class="pname">Condensate Pump, 1/30 HP, 115V</div>
+    <a class="purl" href="https://img.vevorstatic.com/us/LNSPCBYC150GPPQCEV1/original_img-v1/condensate-pump-m100-12.jpg?timestamp=1686794734000&format=webp&format=webp" target="_blank" rel="noopener">https://img.vevorstatic.com/us/LNSPCBYC150GPPQCEV1/original_img-v1/condensate-pump-m100-12.jpg?timestamp=1686794734000&amp;format=webp&amp;format=webp</a>
+  </div>
+</div>
+<div class="card" id="row47">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Nashua-2-in-x-60-yd-Silver-Premium-Duct-Tape-357-2_5070f20b-7a3b-4e7f-927a-caa3012900f6.7502b15cbcbeafe08a7e9fbddc004998.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 47 · Cat 87</div>
+    <div class="pname">Duct Tape, Cloth, 2 in x 60 yd, Silver</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Nashua-2-in-x-60-yd-Silver-Premium-Duct-Tape-357-2_5070f20b-7a3b-4e7f-927a-caa3012900f6.7502b15cbcbeafe08a7e9fbddc004998.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Nashua-2-in-x-60-yd-Silver-Premium-Duct-Tape-357-2_5070f20b-7a3b-4e7f-927a-caa3012900f6.7502b15cbcbeafe08a7e9fbddc004998.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row48">
+  <div class="imgwrap"><img src="https://cdn11.bigcommerce.com/s-3ihov9f/images/stencil/1280x1280/products/35721/114690/us_BXSLMH1HP110VEVAMV1_original_img-v3_recovery-machine-m100-1.2__75138.1679726432.jpg?c=2" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 48 · Cat 89</div>
+    <div class="pname">Refrigerant Recovery Machine, 115V</div>
+    <a class="purl" href="https://cdn11.bigcommerce.com/s-3ihov9f/images/stencil/1280x1280/products/35721/114690/us_BXSLMH1HP110VEVAMV1_original_img-v3_recovery-machine-m100-1.2__75138.1679726432.jpg?c=2" target="_blank" rel="noopener">https://cdn11.bigcommerce.com/s-3ihov9f/images/stencil/1280x1280/products/35721/114690/us_BXSLMH1HP110VEVAMV1_original_img-v3_recovery-machine-m100-1.2__75138.1679726432.jpg?c=2</a>
+  </div>
+</div>
+<div class="card" id="row49">
+  <div class="imgwrap"><img src="https://images.thdstatic.com/productImages/01320a0c-e964-4554-a0f3-984756960ffc/svn/master-flow-flexible-ductwork-f6ifd8x300-64_1000.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 49 · Cat 91</div>
+    <div class="pname">Flexible Duct, Insulated, 8 in x 25 ft</div>
+    <a class="purl" href="https://images.thdstatic.com/productImages/01320a0c-e964-4554-a0f3-984756960ffc/svn/master-flow-flexible-ductwork-f6ifd8x300-64_1000.jpg" target="_blank" rel="noopener">https://images.thdstatic.com/productImages/01320a0c-e964-4554-a0f3-984756960ffc/svn/master-flow-flexible-ductwork-f6ifd8x300-64_1000.jpg</a>
+  </div>
+</div>
+<div class="card" id="row50">
+  <div class="imgwrap"><img src="https://haste-uae.com/wp-content/uploads/2025/02/VDG-1.png" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 50 · Cat 92</div>
+    <div class="pname">Digital Manifold Gauge Set, 2-Valve</div>
+    <a class="purl" href="https://haste-uae.com/wp-content/uploads/2025/02/VDG-1.png" target="_blank" rel="noopener">https://haste-uae.com/wp-content/uploads/2025/02/VDG-1.png</a>
+  </div>
+</div>
+<div class="card" id="row51">
+  <div class="imgwrap"><img src="https://down-id.img.susercontent.com/file/id-11134207-7ra0i-mb3kirm2pzo90c" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 51 · Cat 94</div>
+    <div class="pname">Belt, V-Belt, A36</div>
+    <a class="purl" href="https://down-id.img.susercontent.com/file/id-11134207-7ra0i-mb3kirm2pzo90c" target="_blank" rel="noopener">https://down-id.img.susercontent.com/file/id-11134207-7ra0i-mb3kirm2pzo90c</a>
+  </div>
+</div>
+<div class="card" id="row52">
+  <div class="imgwrap"><img src="https://images.alpinehomeair.com/1000x1000/nws/photos/furnacefilterrack_3A2820BD-6E3F-4749-BDAB-006604ACE7FE.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 52 · Cat 95</div>
+    <div class="pname">Furnace Filter Rack, 16x25, Metal</div>
+    <a class="purl" href="https://images.alpinehomeair.com/1000x1000/nws/photos/furnacefilterrack_3A2820BD-6E3F-4749-BDAB-006604ACE7FE.jpg" target="_blank" rel="noopener">https://images.alpinehomeair.com/1000x1000/nws/photos/furnacefilterrack_3A2820BD-6E3F-4749-BDAB-006604ACE7FE.jpg</a>
+  </div>
+</div>
+<div class="card" id="row53">
+  <div class="imgwrap"><img src="https://texlift.com/cdn/shop/files/Manual-Pallet-Jack-5500-lbs-Capacity-Model-US-PTM55K-Jack-Pallet-TEXLIFT-30092298387525.jpg?v=1777456600&amp;width=1200" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 53 · Cat 98</div>
+    <div class="pname">Pallet Jack, Manual, 5,500 lb Capacity</div>
+    <a class="purl" href="https://texlift.com/cdn/shop/files/Manual-Pallet-Jack-5500-lbs-Capacity-Model-US-PTM55K-Jack-Pallet-TEXLIFT-30092298387525.jpg?v=1777456600&width=1200" target="_blank" rel="noopener">https://texlift.com/cdn/shop/files/Manual-Pallet-Jack-5500-lbs-Capacity-Model-US-PTM55K-Jack-Pallet-TEXLIFT-30092298387525.jpg?v=1777456600&amp;width=1200</a>
+  </div>
+</div>
+<div class="card" id="row54">
+  <div class="imgwrap"><img src="https://apim.canadiantire.ca/v1/product/api/v1/product/image/0600624p?baseStoreId=CTR&amp;lang=en_CA&amp;subscription-key=c01ef3612328420c9f5cd9277e815a0e&amp;imwidth=1244&amp;impolicy=gZoom" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 54 · Cat 100</div>
+    <div class="pname">Hand Truck, Convertible, 800 lb Capacity</div>
+    <a class="purl" href="https://apim.canadiantire.ca/v1/product/api/v1/product/image/0600624p?baseStoreId=CTR&lang=en_CA&subscription-key=c01ef3612328420c9f5cd9277e815a0e&imwidth=1244&impolicy=gZoom" target="_blank" rel="noopener">https://apim.canadiantire.ca/v1/product/api/v1/product/image/0600624p?baseStoreId=CTR&amp;lang=en_CA&amp;subscription-key=c01ef3612328420c9f5cd9277e815a0e&amp;imwidth=1244&amp;impolicy=gZoom</a>
+  </div>
+</div>
+<div class="card" id="row55">
+  <div class="imgwrap"><img src="https://media.tractorsupply.com/is/image/TractorSupplyCompany/2532921?wid=554&amp;hei=554&amp;qlt=90&amp;fmt=jpeg&amp;resMode=sharp2&amp;op_usm=0.9,1.0,8,0" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 55 · Cat 102</div>
+    <div class="pname">Cargo Strap, Ratchet, 2 in x 27 ft, 3,333 lb</div>
+    <a class="purl" href="https://media.tractorsupply.com/is/image/TractorSupplyCompany/2532921?wid=554&hei=554&qlt=90&fmt=jpeg&resMode=sharp2&op_usm=0.9,1.0,8,0" target="_blank" rel="noopener">https://media.tractorsupply.com/is/image/TractorSupplyCompany/2532921?wid=554&amp;hei=554&amp;qlt=90&amp;fmt=jpeg&amp;resMode=sharp2&amp;op_usm=0.9,1.0,8,0</a>
+  </div>
+</div>
+<div class="card" id="row56">
+  <div class="imgwrap"><img src="https://img.uline.com/is/image/uline/H-2941-72A_txt_USEng?$LargeRHD$" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 56 · Cat 104</div>
+    <div class="pname">Wire Shelving Unit, 48x18x72 in, Chrome</div>
+    <a class="purl" href="https://img.uline.com/is/image/uline/H-2941-72A_txt_USEng?$LargeRHD$" target="_blank" rel="noopener">https://img.uline.com/is/image/uline/H-2941-72A_txt_USEng?$LargeRHD$</a>
+  </div>
+</div>
+<div class="card" id="row57">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/51J0KcG9VcL._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 57 · Cat 106</div>
+    <div class="pname">Drum Dolly, 55 Gallon, 1,000 lb Capacity</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/51J0KcG9VcL._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/51J0KcG9VcL._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row58">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Gladiator-Cargo-Nets-SUT100-6-x-8-ft-Heavy-Duty-Trailer-Cargo-Net_6b08548a-a184-4c65-ba42-b81eda27aa82.71f8a298bad7b7fb2eb9bc8a00601cf0.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 58 · Cat 107</div>
+    <div class="pname">Cargo Net, 6x8 ft, Polypropylene</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Gladiator-Cargo-Nets-SUT100-6-x-8-ft-Heavy-Duty-Trailer-Cargo-Net_6b08548a-a184-4c65-ba42-b81eda27aa82.71f8a298bad7b7fb2eb9bc8a00601cf0.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Gladiator-Cargo-Nets-SUT100-6-x-8-ft-Heavy-Duty-Trailer-Cargo-Net_6b08548a-a184-4c65-ba42-b81eda27aa82.71f8a298bad7b7fb2eb9bc8a00601cf0.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row59">
+  <div class="imgwrap"><img src="https://i.pinimg.com/originals/51/d1/ab/51d1abf2d1ce2949105e94883cfc53af.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 59 · Cat 108</div>
+    <div class="pname">Bin Storage Cabinet, 48 Compartment</div>
+    <a class="purl" href="https://i.pinimg.com/originals/51/d1/ab/51d1abf2d1ce2949105e94883cfc53af.jpg" target="_blank" rel="noopener">https://i.pinimg.com/originals/51/d1/ab/51d1abf2d1ce2949105e94883cfc53af.jpg</a>
+  </div>
+</div>
+<div class="card" id="row60">
+  <div class="imgwrap"><img src="https://www.kroger.com/product/images/large/front/0075007120871" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 60 · Cat 110</div>
+    <div class="pname">Floor Scale, 5,000 lb, 4x4 ft Platform</div>
+    <a class="purl" href="https://www.kroger.com/product/images/large/front/0075007120871" target="_blank" rel="noopener">https://www.kroger.com/product/images/large/front/0075007120871</a>
+  </div>
+</div>
+<div class="card" id="row61">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/51uvUqvnR9L._SL1000_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 61 · Cat 112</div>
+    <div class="pname">Caster, Swivel, 6 in, Polyurethane, 750 lb</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/51uvUqvnR9L._SL1000_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/51uvUqvnR9L._SL1000_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row62">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/6148w+qtA5L._AC_SL1365_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 62 · Cat 114</div>
+    <div class="pname">Stretch Wrap, 18 in x 1500 ft, 80 Gauge</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/6148w+qtA5L._AC_SL1365_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/6148w+qtA5L._AC_SL1365_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row63">
+  <div class="imgwrap"><img src="https://media.cityelectricsupply.com/media/dottie/5mb381/images/dottie_918344_p_lrg.webp" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 63 · Cat 117</div>
+    <div class="pname">Hex Cap Screw, Grade 5, 3/8-16 x 1-1/2 in, 100/Pk</div>
+    <a class="purl" href="https://media.cityelectricsupply.com/media/dottie/5mb381/images/dottie_918344_p_lrg.webp" target="_blank" rel="noopener">https://media.cityelectricsupply.com/media/dottie/5mb381/images/dottie_918344_p_lrg.webp</a>
+  </div>
+</div>
+<div class="card" id="row64">
+  <div class="imgwrap"><img src="https://cdn11.bigcommerce.com/s-gdy1ehz/images/stencil/1280x1280/products/26679/26778/848__62509.1740407462.png?c=2" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 64 · Cat 119</div>
+    <div class="pname">Hex Nut, Grade 5, 3/8-16, 100/Pk</div>
+    <a class="purl" href="https://cdn11.bigcommerce.com/s-gdy1ehz/images/stencil/1280x1280/products/26679/26778/848__62509.1740407462.png?c=2" target="_blank" rel="noopener">https://cdn11.bigcommerce.com/s-gdy1ehz/images/stencil/1280x1280/products/26679/26778/848__62509.1740407462.png?c=2</a>
+  </div>
+</div>
+<div class="card" id="row65">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/61zNXBn4gvL._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 65 · Cat 121</div>
+    <div class="pname">Flat Washer, USS, 3/8 in, 100/Pk</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/61zNXBn4gvL._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/61zNXBn4gvL._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row66">
+  <div class="imgwrap"><img src="https://www.zoro.com/static/cms/product/large/ZYgiffSdKQVanhaTPGWnXXbpmyD14pvsp.JPG" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 66 · Cat 122</div>
+    <div class="pname">Socket Cap Screw, Alloy, 1/4-20 x 1 in, 50/Pk</div>
+    <a class="purl" href="https://www.zoro.com/static/cms/product/large/ZYgiffSdKQVanhaTPGWnXXbpmyD14pvsp.JPG" target="_blank" rel="noopener">https://www.zoro.com/static/cms/product/large/ZYgiffSdKQVanhaTPGWnXXbpmyD14pvsp.JPG</a>
+  </div>
+</div>
+<div class="card" id="row67">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/12-x-1-White-Ruspert-Coated-Hex-Washer-Head-Self-Drilling-Screws-100-pcs_dc54ea43-b213-497d-8eda-a209e6a6d5c2.2853edbb611d416f361089f2068724af.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 67 · Cat 124</div>
+    <div class="pname">Self-Drilling Screw, #12 x 1 in, Hex Washer Head, 100/Pk</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/12-x-1-White-Ruspert-Coated-Hex-Washer-Head-Self-Drilling-Screws-100-pcs_dc54ea43-b213-497d-8eda-a209e6a6d5c2.2853edbb611d416f361089f2068724af.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/12-x-1-White-Ruspert-Coated-Hex-Washer-Head-Self-Drilling-Screws-100-pcs_dc54ea43-b213-497d-8eda-a209e6a6d5c2.2853edbb611d416f361089f2068724af.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row68">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/productimages/18002a31-f0fd-4990-b194-a53e59f0a6ff/15526917.jpg?size=pdhism" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 68 · Cat 126</div>
+    <div class="pname">Concrete Anchor, Wedge, 1/2 in x 3-3/4 in, 25/Pk</div>
+    <a class="purl" href="https://mobileimages.lowes.com/productimages/18002a31-f0fd-4990-b194-a53e59f0a6ff/15526917.jpg?size=pdhism" target="_blank" rel="noopener">https://mobileimages.lowes.com/productimages/18002a31-f0fd-4990-b194-a53e59f0a6ff/15526917.jpg?size=pdhism</a>
+  </div>
+</div>
+<div class="card" id="row69">
+  <div class="imgwrap"><img src="https://www.permatex.com/wp-content/uploads/2021/12/24210_Main-720x720-ee44a4cc-0edf-4d50-a7e5-ebb89c6549cd.png" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 69 · Cat 128</div>
+    <div class="pname">Threadlocker, Blue, Medium Strength, 10 ml</div>
+    <a class="purl" href="https://www.permatex.com/wp-content/uploads/2021/12/24210_Main-720x720-ee44a4cc-0edf-4d50-a7e5-ebb89c6549cd.png" target="_blank" rel="noopener">https://www.permatex.com/wp-content/uploads/2021/12/24210_Main-720x720-ee44a4cc-0edf-4d50-a7e5-ebb89c6549cd.png</a>
+  </div>
+</div>
+<div class="card" id="row70">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/81pA33jcCFL.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 70 · Cat 130</div>
+    <div class="pname">Cotter Pin Assortment, Steel, 150-Piece</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/81pA33jcCFL.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/81pA33jcCFL.jpg</a>
+  </div>
+</div>
+<div class="card" id="row71">
+  <div class="imgwrap"><img src="https://www.uboltit.com/media/products/images/products/7459_65dcf8a7f386e_proimg.png" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 71 · Cat 131</div>
+    <div class="pname">U-Bolt, 3/8-16, 2 in Pipe, Zinc</div>
+    <a class="purl" href="https://www.uboltit.com/media/products/images/products/7459_65dcf8a7f386e_proimg.png" target="_blank" rel="noopener">https://www.uboltit.com/media/products/images/products/7459_65dcf8a7f386e_proimg.png</a>
+  </div>
+</div>
+<div class="card" id="row72">
+  <div class="imgwrap"><img src="https://images.tekton.com/assets/tekton-retaining-ring-pliers-set-prr90003_front.jpg?width=1536&amp;quality=75" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 72 · Cat 133</div>
+    <div class="pname">Retaining Ring Pliers Set, Internal/External</div>
+    <a class="purl" href="https://images.tekton.com/assets/tekton-retaining-ring-pliers-set-prr90003_front.jpg?width=1536&quality=75" target="_blank" rel="noopener">https://images.tekton.com/assets/tekton-retaining-ring-pliers-set-prr90003_front.jpg?width=1536&amp;quality=75</a>
+  </div>
+</div>
+<div class="card" id="row73">
+  <div class="imgwrap"><img src="https://www.neisupplies.com/wp-content/uploads/2024/04/803686.JPG" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 73 · Cat 136</div>
+    <div class="pname">Floor Cleaner Concentrate, Neutral, 1 gal</div>
+    <a class="purl" href="https://www.neisupplies.com/wp-content/uploads/2024/04/803686.JPG" target="_blank" rel="noopener">https://www.neisupplies.com/wp-content/uploads/2024/04/803686.JPG</a>
+  </div>
+</div>
+<div class="card" id="row74">
+  <div class="imgwrap"><img src="https://www.lickingspoon.com/wp-content/uploads/2025/09/colorful_microfiber_cleaning_cloths_v3wv8.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 74 · Cat 138</div>
+    <div class="pname">Microfiber Cleaning Cloths, Assorted, 12-Pack</div>
+    <a class="purl" href="https://www.lickingspoon.com/wp-content/uploads/2025/09/colorful_microfiber_cleaning_cloths_v3wv8.jpg" target="_blank" rel="noopener">https://www.lickingspoon.com/wp-content/uploads/2025/09/colorful_microfiber_cleaning_cloths_v3wv8.jpg</a>
+  </div>
+</div>
+<div class="card" id="row75">
+  <div class="imgwrap"><img src="https://img.vevorstatic.com/us/DJSDTBT3538QKFWB8V0/original_img-v1/mop-bucket-with-wringer-f1.jpg?timestamp=1714439761000&amp;format=webp" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 75 · Cat 139</div>
+    <div class="pname">Mop Bucket and Wringer, 35 qt, Yellow</div>
+    <a class="purl" href="https://img.vevorstatic.com/us/DJSDTBT3538QKFWB8V0/original_img-v1/mop-bucket-with-wringer-f1.jpg?timestamp=1714439761000&format=webp" target="_blank" rel="noopener">https://img.vevorstatic.com/us/DJSDTBT3538QKFWB8V0/original_img-v1/mop-bucket-with-wringer-f1.jpg?timestamp=1714439761000&amp;format=webp</a>
+  </div>
+</div>
+<div class="card" id="row76">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Plasticplace-55-60-Gallon-Heavy-Duty-Trash-Bags-1-0-Mil-Black-Garbage-Can-Liners-100-Count_5bd9c6f4-9a88-4f04-ab03-08cbdeb82ccc.62928d5651cd33bed1ea427836629fc0.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 76 · Cat 141</div>
+    <div class="pname">Trash Bags, 55 gal, Heavy Duty, 100/Case</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Plasticplace-55-60-Gallon-Heavy-Duty-Trash-Bags-1-0-Mil-Black-Garbage-Can-Liners-100-Count_5bd9c6f4-9a88-4f04-ab03-08cbdeb82ccc.62928d5651cd33bed1ea427836629fc0.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Plasticplace-55-60-Gallon-Heavy-Duty-Trash-Bags-1-0-Mil-Black-Garbage-Can-Liners-100-Count_5bd9c6f4-9a88-4f04-ab03-08cbdeb82ccc.62928d5651cd33bed1ea427836629fc0.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row77">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Professional-Lysol-Disinfectant-Spray-Spray-Aerosol-19-fl-oz-0-6-quart-Fresh-Scent-1-Each-Clear-Bundle-of-2-Each_8cf52b94-fa16-4699-bd5b-e62884a7be1b.e3cf9a8f17fe7b4f65e3270ed5df1818.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 77 · Cat 143</div>
+    <div class="pname">Disinfectant Spray, 19 oz Aerosol</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Professional-Lysol-Disinfectant-Spray-Spray-Aerosol-19-fl-oz-0-6-quart-Fresh-Scent-1-Each-Clear-Bundle-of-2-Each_8cf52b94-fa16-4699-bd5b-e62884a7be1b.e3cf9a8f17fe7b4f65e3270ed5df1818.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Professional-Lysol-Disinfectant-Spray-Spray-Aerosol-19-fl-oz-0-6-quart-Fresh-Scent-1-Each-Clear-Bundle-of-2-Each_8cf52b94-fa16-4699-bd5b-e62884a7be1b.e3cf9a8f17fe7b4f65e3270ed5df1818.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row78">
+  <div class="imgwrap"><img src="https://mobileimages.lowes.com/productimages/602096b3-7765-4527-a91f-1b7ea2957708/86141834.jpeg?size=pdhism" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 78 · Cat 145</div>
+    <div class="pname">Paper Towels, Hardwound, 800 ft, 6 Rolls</div>
+    <a class="purl" href="https://mobileimages.lowes.com/productimages/602096b3-7765-4527-a91f-1b7ea2957708/86141834.jpeg?size=pdhism" target="_blank" rel="noopener">https://mobileimages.lowes.com/productimages/602096b3-7765-4527-a91f-1b7ea2957708/86141834.jpeg?size=pdhism</a>
+  </div>
+</div>
+<div class="card" id="row79">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/714fNQ7ds8L.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 79 · Cat 147</div>
+    <div class="pname">Wet Floor Sign, Bilingual, Yellow</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/714fNQ7ds8L.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/714fNQ7ds8L.jpg</a>
+  </div>
+</div>
+<div class="card" id="row80">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/71e2rLxgSOL._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 80 · Cat 148</div>
+    <div class="pname">Push Broom, 24 in, Stiff Bristle</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/71e2rLxgSOL._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/71e2rLxgSOL._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row81">
+  <div class="imgwrap"><img src="https://store.w-p.co.uk/netalogue/zoom/109385.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 81 · Cat 150</div>
+    <div class="pname">Hand Soap, Foam, Fragrance-Free, 1 L</div>
+    <a class="purl" href="https://store.w-p.co.uk/netalogue/zoom/109385.jpg" target="_blank" rel="noopener">https://store.w-p.co.uk/netalogue/zoom/109385.jpg</a>
+  </div>
+</div>
+<div class="card" id="row82">
+  <div class="imgwrap"><img src="https://www.floorbuffers.com/cdn/shop/products/404417-red-scrubbing-pads-case_700x700.jpg?v=1669663229" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 82 · Cat 152</div>
+    <div class="pname">Floor Scrubber Pads, Red, 17 in, 5-Pack</div>
+    <a class="purl" href="https://www.floorbuffers.com/cdn/shop/products/404417-red-scrubbing-pads-case_700x700.jpg?v=1669663229" target="_blank" rel="noopener">https://www.floorbuffers.com/cdn/shop/products/404417-red-scrubbing-pads-case_700x700.jpg?v=1669663229</a>
+  </div>
+</div>
+<div class="card" id="row83">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/71Ccsh05ehL._SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 83 · Cat 155</div>
+    <div class="pname">Electric Motor, 1 HP, 1750 RPM, 115/230V</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/71Ccsh05ehL._SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/71Ccsh05ehL._SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row84">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/IMM-Replacement-for-Century-GF2054-Electric-Motor-1-2-hp-1725-RPM-115-Volts-Sleeve-Bearing-Belt-Drive-Blower-Motor_121f6b5f-e5d8-4f38-965b-8a9e0d8bfea5.09123b139b6da2e6d3dc1015031cc44e.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 84 · Cat 155</div>
+    <div class="pname">Electric Motor, 1/2 HP, 1725 RPM, 115V</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/IMM-Replacement-for-Century-GF2054-Electric-Motor-1-2-hp-1725-RPM-115-Volts-Sleeve-Bearing-Belt-Drive-Blower-Motor_121f6b5f-e5d8-4f38-965b-8a9e0d8bfea5.09123b139b6da2e6d3dc1015031cc44e.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/IMM-Replacement-for-Century-GF2054-Electric-Motor-1-2-hp-1725-RPM-115-Volts-Sleeve-Bearing-Belt-Drive-Blower-Motor_121f6b5f-e5d8-4f38-965b-8a9e0d8bfea5.09123b139b6da2e6d3dc1015031cc44e.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row85">
+  <div class="imgwrap"><img src="https://5.imimg.com/data5/SELLER/Default/2025/10/550491497/CZ/LP/YO/51544140/soler-drive-500x500.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 85 · Cat 157</div>
+    <div class="pname">VFD, 1 HP, 230V, Single Phase Input</div>
+    <a class="purl" href="https://5.imimg.com/data5/SELLER/Default/2025/10/550491497/CZ/LP/YO/51544140/soler-drive-500x500.jpg" target="_blank" rel="noopener">https://5.imimg.com/data5/SELLER/Default/2025/10/550491497/CZ/LP/YO/51544140/soler-drive-500x500.jpg</a>
+  </div>
+</div>
+<div class="card" id="row86">
+  <div class="imgwrap"><img src="https://www.rockymountainbearings.com/cdn/shop/files/pillowblock1_2997030c-2cd6-4c50-89c8-2c94113e3df0_1024x1024@2x.jpg?v=1761871390" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 86 · Cat 159</div>
+    <div class="pname">Pillow Block Bearing, 1 in Bore</div>
+    <a class="purl" href="https://www.rockymountainbearings.com/cdn/shop/files/pillowblock1_2997030c-2cd6-4c50-89c8-2c94113e3df0_1024x1024@2x.jpg?v=1761871390" target="_blank" rel="noopener">https://www.rockymountainbearings.com/cdn/shop/files/pillowblock1_2997030c-2cd6-4c50-89c8-2c94113e3df0_1024x1024@2x.jpg?v=1761871390</a>
+  </div>
+</div>
+<div class="card" id="row87">
+  <div class="imgwrap"><img src="https://vbindustrialsupply.com/cdn/shop/files/5267338_61ab9c5c-39be-420f-a57c-34218edb60f10_1024x1024.jpg?v=1773281678" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 87 · Cat 161</div>
+    <div class="pname">Shaft Coupling, Jaw, L-050, 5/8 in Bore</div>
+    <a class="purl" href="https://vbindustrialsupply.com/cdn/shop/files/5267338_61ab9c5c-39be-420f-a57c-34218edb60f10_1024x1024.jpg?v=1773281678" target="_blank" rel="noopener">https://vbindustrialsupply.com/cdn/shop/files/5267338_61ab9c5c-39be-420f-a57c-34218edb60f10_1024x1024.jpg?v=1773281678</a>
+  </div>
+</div>
+<div class="card" id="row88">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/81NxsS342tL._AC_UF894,1000_QL80_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 88 · Cat 164</div>
+    <div class="pname">LED High Bay Light, 150W, 5000K, 21,000 lm</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/81NxsS342tL._AC_UF894,1000_QL80_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/81NxsS342tL._AC_UF894,1000_QL80_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row89">
+  <div class="imgwrap"><img src="https://m.media-amazon.com/images/I/61CJXK1WKEL._AC_SL1500_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 89 · Cat 166</div>
+    <div class="pname">LED Wall Pack, 40W, 5000K, Photocell</div>
+    <a class="purl" href="https://m.media-amazon.com/images/I/61CJXK1WKEL._AC_SL1500_.jpg" target="_blank" rel="noopener">https://m.media-amazon.com/images/I/61CJXK1WKEL._AC_SL1500_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row90">
+  <div class="imgwrap"><img src="https://www.warehouse-lighting.com/cdn/shop/files/productImages_2FT8-4FT-TYPB-2E-18W-40K-C_1.jpg?v=1686694484" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 90 · Cat 168</div>
+    <div class="pname">LED Tube, T8, 4 ft, 18W, 4000K</div>
+    <a class="purl" href="https://www.warehouse-lighting.com/cdn/shop/files/productImages_2FT8-4FT-TYPB-2E-18W-40K-C_1.jpg?v=1686694484" target="_blank" rel="noopener">https://www.warehouse-lighting.com/cdn/shop/files/productImages_2FT8-4FT-TYPB-2E-18W-40K-C_1.jpg?v=1686694484</a>
+  </div>
+</div>
+<div class="card" id="row91">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Dewalt-DW4541-Type-27-Depressed-Center-Fast-Cutting-Grinding-Wheel-4-1-2-in-Dia-x-1-4-in-T_acb1cf65-7bc1-4cf1-8d42-f156338fb2a4.109834e694ada9200a06505c0f455eb8.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 91 · Cat 171</div>
+    <div class="pname">Grinding Wheel, 4-1/2 in x 1/4 in, Type 27</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Dewalt-DW4541-Type-27-Depressed-Center-Fast-Cutting-Grinding-Wheel-4-1-2-in-Dia-x-1-4-in-T_acb1cf65-7bc1-4cf1-8d42-f156338fb2a4.109834e694ada9200a06505c0f455eb8.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Dewalt-DW4541-Type-27-Depressed-Center-Fast-Cutting-Grinding-Wheel-4-1-2-in-Dia-x-1-4-in-T_acb1cf65-7bc1-4cf1-8d42-f156338fb2a4.109834e694ada9200a06505c0f455eb8.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row92">
+  <div class="imgwrap"><img src="https://cdn11.bigcommerce.com/s-qz13ep5fb4/images/stencil/1280x1280/products/97583/226717/5005785b-2a86-4c52-a8c7-f819dbbd949e__77256.1674883046.jpg?c=1" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 92 · Cat 173</div>
+    <div class="pname">Flap Disc, 4-1/2 in, 60 Grit, Type 29</div>
+    <a class="purl" href="https://cdn11.bigcommerce.com/s-qz13ep5fb4/images/stencil/1280x1280/products/97583/226717/5005785b-2a86-4c52-a8c7-f819dbbd949e__77256.1674883046.jpg?c=1" target="_blank" rel="noopener">https://cdn11.bigcommerce.com/s-qz13ep5fb4/images/stencil/1280x1280/products/97583/226717/5005785b-2a86-4c52-a8c7-f819dbbd949e__77256.1674883046.jpg?c=1</a>
+  </div>
+</div>
+<div class="card" id="row93">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/Scotch-Super-77-Multi-Purpose-Spray-Adhesive-13-5-Oz_7713d284-e4eb-494b-bf48-d3ee6d83c6b8.aa06ebd6003e539d364f30227b9f9306.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 93 · Cat 176</div>
+    <div class="pname">Spray Adhesive, Multipurpose, 13.5 oz</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/Scotch-Super-77-Multi-Purpose-Spray-Adhesive-13-5-Oz_7713d284-e4eb-494b-bf48-d3ee6d83c6b8.aa06ebd6003e539d364f30227b9f9306.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/Scotch-Super-77-Multi-Purpose-Spray-Adhesive-13-5-Oz_7713d284-e4eb-494b-bf48-d3ee6d83c6b8.aa06ebd6003e539d364f30227b9f9306.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row94">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/GE-Advanced-Silicone-Kitchen-Bath-Sealant-Pack-of-1-Clear-10-1-fl-oz-Cartridge_9028e055-0cc9-49ec-b534-1cf2e6ca13e2.4b449f2e46b6473538877b30c1b58a84.jpeg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 94 · Cat 178</div>
+    <div class="pname">Silicone Sealant, Clear, 10.1 oz Cartridge</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/GE-Advanced-Silicone-Kitchen-Bath-Sealant-Pack-of-1-Clear-10-1-fl-oz-Cartridge_9028e055-0cc9-49ec-b534-1cf2e6ca13e2.4b449f2e46b6473538877b30c1b58a84.jpeg" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/GE-Advanced-Silicone-Kitchen-Bath-Sealant-Pack-of-1-Clear-10-1-fl-oz-Cartridge_9028e055-0cc9-49ec-b534-1cf2e6ca13e2.4b449f2e46b6473538877b30c1b58a84.jpeg</a>
+  </div>
+</div>
+<div class="card" id="row95">
+  <div class="imgwrap"><img src="https://i5.walmartimages.com/seo/CRC-03086-Food-Grade-Penetrating-Oil-Aerosol-11-Oz_77f16119-fa24-4f84-b634-deb1afb65c5f.5196de802f91757f132e911b58eb9356.jpeg?odnHeight=612&amp;odnWidth=612&amp;odnBg=FFFFFF" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 95 · Cat 181</div>
+    <div class="pname">Penetrating Oil, 11 oz Aerosol</div>
+    <a class="purl" href="https://i5.walmartimages.com/seo/CRC-03086-Food-Grade-Penetrating-Oil-Aerosol-11-Oz_77f16119-fa24-4f84-b634-deb1afb65c5f.5196de802f91757f132e911b58eb9356.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" target="_blank" rel="noopener">https://i5.walmartimages.com/seo/CRC-03086-Food-Grade-Penetrating-Oil-Aerosol-11-Oz_77f16119-fa24-4f84-b634-deb1afb65c5f.5196de802f91757f132e911b58eb9356.jpeg?odnHeight=612&amp;odnWidth=612&amp;odnBg=FFFFFF</a>
+  </div>
+</div>
+<div class="card" id="row96">
+  <div class="imgwrap"><img src="https://trdsf.com/cdn/shop/files/complete-electrical-loto-kit_1440x.png?v=1722620325" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 96 · Cat 183</div>
+    <div class="pname">Lockout/Tagout Kit, Electrical, 22-Piece</div>
+    <a class="purl" href="https://trdsf.com/cdn/shop/files/complete-electrical-loto-kit_1440x.png?v=1722620325" target="_blank" rel="noopener">https://trdsf.com/cdn/shop/files/complete-electrical-loto-kit_1440x.png?v=1722620325</a>
+  </div>
+</div>
+<div class="card" id="row97">
+  <div class="imgwrap"><img src="https://images.globalindustrial.com/images/1500x1500/B726492.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 97 · Cat 185</div>
+    <div class="pname">Spill Kit, Universal, 20 Gallon</div>
+    <a class="purl" href="https://images.globalindustrial.com/images/1500x1500/B726492.jpg" target="_blank" rel="noopener">https://images.globalindustrial.com/images/1500x1500/B726492.jpg</a>
+  </div>
+</div>
+<div class="card" id="row98">
+  <div class="imgwrap"><img src="https://topprotools24.com/wp-content/uploads/2025/08/51ZijTHB0RL._SL1000_.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 98 · Cat 186</div>
+    <div class="pname">Cut-Resistant Gloves, Level A4, Size 9</div>
+    <a class="purl" href="https://topprotools24.com/wp-content/uploads/2025/08/51ZijTHB0RL._SL1000_.jpg" target="_blank" rel="noopener">https://topprotools24.com/wp-content/uploads/2025/08/51ZijTHB0RL._SL1000_.jpg</a>
+  </div>
+</div>
+<div class="card" id="row99">
+  <div class="imgwrap"><img src="https://cdn11.bigcommerce.com/s-f4083/images/stencil/1280x1280/products/169197/227254/LIFT-HDFC-17WG-D__15092.1643737997.jpg?c=2" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 99 · Cat 188</div>
+    <div class="pname">Hard Hat, Cap Style, White, Ratchet Suspension</div>
+    <a class="purl" href="https://cdn11.bigcommerce.com/s-f4083/images/stencil/1280x1280/products/169197/227254/LIFT-HDFC-17WG-D__15092.1643737997.jpg?c=2" target="_blank" rel="noopener">https://cdn11.bigcommerce.com/s-f4083/images/stencil/1280x1280/products/169197/227254/LIFT-HDFC-17WG-D__15092.1643737997.jpg?c=2</a>
+  </div>
+</div>
+<div class="card" id="row100">
+  <div class="imgwrap"><img src="https://cdnimg.webstaurantstore.com/images/products/xxl/399420/1480734.jpg" loading="lazy" alt="" onerror="this.parentNode.classList.add('broken')"><div class="brokenmsg">imagem não carregou</div></div>
+  <div class="meta">
+    <div class="rowtag">Linha 100 · Cat 190</div>
+    <div class="pname">Hard Hat, Cap Style, Ratchet Suspension</div>
+    <a class="purl" href="https://cdnimg.webstaurantstore.com/images/products/xxl/399420/1480734.jpg" target="_blank" rel="noopener">https://cdnimg.webstaurantstore.com/images/products/xxl/399420/1480734.jpg</a>
+  </div>
+</div>
+</div>
+<script>
+  const q = document.getElementById('q');
+  const cards = [...document.querySelectorAll('.card')];
+  const count = document.getElementById('count');
+  q.addEventListener('input', () => {
+    const t = q.value.trim().toLowerCase();
+    let n = 0;
+    for (const c of cards) {
+      const hit = !t || c.textContent.toLowerCase().includes(t);
+      c.classList.toggle('hide', !hit);
+      if (hit) n++;
+    }
+    count.textContent = n + ' produtos';
+  });
+</script>
+</body>
+</html>
