@@ -307,6 +307,8 @@
             { category: "190", name: "Welding Helmet, Auto Darkening" },
         ];
 
+        const NETLIFY_URL = "https://validacao-imagens-catalogo.netlify.app/images";
+
         const gallery = document.getElementById('gallery');
         const filterInput = document.getElementById('categoryFilter');
         const noResults = document.getElementById('noResults');
@@ -330,12 +332,12 @@
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                const imgPath = `images/img_${product.category}.jpg`;
+                const imgUrl = `${NETLIFY_URL}/img_${product.category}.jpg`;
 
                 card.innerHTML = `
                     <div class="card-image-wrapper">
                         <img
-                            src="${imgPath}"
+                            src="${imgUrl}"
                             alt="${product.name}"
                             onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\"error-msg\">Imagem não carregou</div>'"
                             loading="lazy"
@@ -344,7 +346,7 @@
                     <div class="card-content">
                         <span class="card-category">Cat ${product.category}</span>
                         <div class="card-title">${product.name}</div>
-                        <a href="${imgPath}" target="_blank" class="card-link">Ver imagem</a>
+                        <a href="${imgUrl}" target="_blank" class="card-link">Ver imagem</a>
                     </div>
                 `;
 
