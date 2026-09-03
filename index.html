@@ -114,11 +114,7 @@
         }
 
         .card-image-wrapper .error-msg {
-            color: #999;
-            font-size: 0.9em;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
+            display: none;
         }
 
         .card-content {
@@ -129,13 +125,6 @@
             position: relative;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
         .card-category {
             display: inline-block;
             background: #667eea;
@@ -144,28 +133,42 @@
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
+            margin-bottom: 10px;
             width: fit-content;
         }
 
-        .copy-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: background 0.3s;
+        .card-footer {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
         }
 
-        .copy-btn:hover {
-            background: rgba(102, 126, 234, 0.1);
+        .card-footer-label {
+            flex: 1;
+            text-align: center;
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
         }
 
-        .copy-btn.copied {
-            color: #4caf50;
+        .card-footer-label:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .card-footer-label.copied {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
         }
 
         .card-title {
@@ -174,21 +177,7 @@
             line-height: 1.4;
             font-size: 0.95em;
             flex-grow: 1;
-            margin-bottom: 10px;
-        }
-
-        .card-link {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.85em;
-            font-weight: 500;
-            word-break: break-all;
-            transition: color 0.3s;
-        }
-
-        .card-link:hover {
-            color: #764ba2;
-            text-decoration: underline;
+            margin-bottom: 0;
         }
 
         .no-results {
@@ -475,13 +464,16 @@
 
         function copyToClipboard(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
-                btn.textContent = '✓';
+                const originalText = btn.textContent;
+                btn.textContent = '✓ COPIADO';
                 btn.classList.add('copied');
                 showToast('URL copiada!');
                 setTimeout(() => {
-                    btn.textContent = '📋';
+                    btn.textContent = originalText;
                     btn.classList.remove('copied');
                 }, 2000);
+            }).catch(() => {
+                showToast('Erro ao copiar URL');
             });
         }
 
@@ -507,31 +499,33 @@
                 const ext = IMAGE_EXTENSIONS[product.category];
                 const imgPath = `images/img_${product.category}.${ext}`;
 
+                const fullUrl = new URL(imgPath, window.location.href).href;
+
                 card.innerHTML = `
                     <div class="card-image-wrapper">
                         <img
                             src="${imgPath}"
                             alt="${product.name}"
-                            onerror="this.parentElement.innerHTML = '<div class=\"error-msg\">Imagem não carregou</div>'"
                         >
                     </div>
                     <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-category">Cat ${product.category}</span>
-                            <button class="copy-btn" title="Copiar URL" data-url="${imgPath}">📋</button>
-                        </div>
+                        <span class="card-category">Cat ${product.category}</span>
                         <div class="card-title">${product.name}</div>
-                        <a href="${imgPath}" target="_blank" class="card-link">Ver imagem</a>
+                        <div class="card-footer">
+                            <a href="${imgPath}" target="_blank" class="card-footer-label">VER</a>
+                            <button class="card-footer-label" data-url="${fullUrl}">COPIAR</button>
+                        </div>
                     </div>
                 `;
 
                 gallery.appendChild(card);
 
                 // Adicionar evento de cópia
-                const copyBtn = card.querySelector('.copy-btn');
+                const copyBtn = card.querySelector('.card-footer-label[data-url]');
                 copyBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    copyToClipboard(imgPath, copyBtn);
+                    const url = copyBtn.getAttribute('data-url');
+                    copyToClipboard(url, copyBtn);
                 });
             });
         }
