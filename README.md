@@ -14,15 +14,13 @@ python3 -m http.server 8000
 
 | Arquivo | Função |
 |---|---|
-| `catalog.json` | Dados do catálogo (categoria, nome, URL de origem, imagem local) |
-| `index.html` | Galeria com filtro por categoria e botão de copiar URL |
-| `images/` | Imagens locais (`img_<categoria>.<ext>`) |
-| `download_images.py` | Baixa as imagens que faltam (`--dry-run`, `--force`) |
+| `index.html` | Galeria com a relação dos produtos, filtro por categoria e botão de copiar URL |
+| `images/` | Imagens (`img_<categoria>.<ext>`), trocadas direto na pasta |
 | `netlify.toml` | Configuração de publicação, cache e headers |
 
 ## Fluxo de mudança
 
-1. Criar uma branch e fazer as alterações (dados em `catalog.json`).
+1. Criar uma branch e fazer as alterações (imagens em `images/`, relação em `index.html`).
 2. Abrir um PR: o Netlify gera um Deploy Preview para validar.
 3. Merge na `main` publica em produção.
 

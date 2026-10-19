@@ -8,12 +8,6 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
-# catalog.json deve refletir sempre o último deploy.
-[[headers]]
-  for = "/catalog.json"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
 # Ferramenta interna de validação, com imagens de terceiros: fora dos buscadores.
 [[headers]]
   for = "/*"
