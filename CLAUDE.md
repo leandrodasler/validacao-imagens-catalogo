@@ -46,4 +46,5 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 
 ## Pendências conhecidas
 
-- Categorias 41, 102 e 183 estão sem imagem (`image: null`); a galeria mostra "Imagem pendente".
+- A galeria lista as 190 categorias da VTEX (inclusive as de topo e intermediárias). Só 95 têm imagem; as demais (`image: null`) aparecem como "Pending image".
+- Muitas imagens atuais foram feitas para os nomes antigos e podem não representar a categoria da VTEX; revisar uma a uma.
