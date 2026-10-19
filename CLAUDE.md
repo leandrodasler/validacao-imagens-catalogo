@@ -22,10 +22,18 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 
 ## Convenções
 
-- Sem dependências nem build.
-- Textos da interface em português (pt-BR).
+- Sem dependências nem build. Única exceção: as fontes Inter e JetBrains Mono vêm do Google Fonts (com fallback para fontes do sistema).
+- **Todo texto exibido na página deve estar em inglês** (interface, estados, mensagens, tooltips, `lang="en"`).
 - Montar o DOM com `textContent`/`createElement` (nomes de produto contêm aspas, ex.: `3/8"-16`).
 - O site é interno e não deve ser indexado.
+
+## Visual (referência: dashboard "Tendra")
+
+- Tokens de cor e fonte ficam em `:root` no `index.html`; reutilizar em vez de criar cores novas.
+- Fundo externo cinza claro, painel branco arredondado (28px), cards com borda `--line` e raio 16-20px.
+- Texto em Inter; rótulos pequenos em JetBrains Mono maiúsculo com espaçamento (`.label`, `.chip`).
+- Chips coloridos: cinza (neutro), azul, âmbar (pendente), verde (ok). Botão primário escuro, secundários brancos com borda.
+- Cards de resumo com barras segmentadas (`.bars`); estado vazio/pendente com borda tracejada.
 
 ## Pendências conhecidas
 
