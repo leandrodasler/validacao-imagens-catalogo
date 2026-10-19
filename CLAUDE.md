@@ -6,7 +6,7 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 ## Estrutura
 
 - `index.html` — galeria (HTML/CSS/JS puro, sem build). Contém a relação dos produtos no array
-  `products` (`{ category, name, path, image }`), usado para a pesquisa por categoria.
+  `products` (`{ category, name, path, products, skus, image }`), usado para a pesquisa por categoria.
   `name` e `path` vêm da árvore de categorias da VTEX (fonte da verdade, conta `demoindsupply`).
   `image` é o caminho (`images/img_<categoria>.<ext>`) ou `null` se a imagem está pendente.
 - `images/` — imagens, nomeadas por categoria. As imagens são trocadas direto nessa pasta.
@@ -28,6 +28,15 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
   `GET https://demoindsupply.vtexcommercestable.com.br/api/catalog_system/pub/category/tree/5`
 - Ao mudar de conta ou se a árvore mudar, refazer `name`/`path` a partir dessa API; não editar nomes à mão.
 - A imagem de cada categoria deve representar a categoria da VTEX (o nome mostrado), não outro produto.
+
+## Contagem de produtos e SKUs (VTEX)
+
+- `products` é **exato**: header `resources` de `GET /api/catalog_system/pub/products/search?fq=C:/<ids do caminho>/&_from=0&_to=0`
+  (o filtro exige o caminho completo de IDs, ex.: `C:/5/6/7/`; inclui subcategorias).
+- `skus` é uma **estimativa** (exibida com `~`): 3 páginas de 50 produtos espalhadas nos primeiros 2.500 resultados (limite de offset da busca),
+  média de SKUs dos produtos ligados *diretamente* à categoria × produtos diretos, somada às subcategorias.
+- A busca pública só enxerga produtos ativos/visíveis na vitrine. SKUs exatos exigem a Catalog API privada (AppKey/AppToken).
+- É um snapshot (data no rodapé da página); refazer a coleta se o catálogo mudar. O script de coleta não fica no repositório.
 
 ## Convenções
 
