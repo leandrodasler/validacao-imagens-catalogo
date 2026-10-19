@@ -1,0 +1,21 @@
+# Site estático: sem build, publica a raiz do repositório.
+[build]
+  publish = "."
+
+# Imagens trocam de conteúdo mantendo o nome: cache curto.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# catalog.json deve refletir sempre o último deploy.
+[[headers]]
+  for = "/catalog.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Ferramenta interna de validação, com imagens de terceiros: fora dos buscadores.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

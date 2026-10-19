@@ -113,8 +113,10 @@
             padding: 10px;
         }
 
-        .card-image-wrapper .error-msg {
-            display: none;
+        .card-image-wrapper .pending-msg {
+            color: #999;
+            font-size: 0.9em;
+            font-weight: 600;
         }
 
         .card-content {
@@ -248,211 +250,12 @@
     </div>
 
     <script>
-        // Mapa de extensões das imagens (categoria -> extensão)
-        const IMAGE_EXTENSIONS = {
-            "2": "jpg",
-            "7": "jpg",
-            "9": "jpg",
-            "12": "png",
-            "14": "jpg",
-            "16": "jpg",
-            "18": "jpg",
-            "20": "gif",
-            "23": "jpg",
-            "24": "jpg",
-            "25": "jpg",
-            "27": "jpg",
-            "28": "jpg",
-            "29": "jpg",
-            "30": "jpg",
-            "31": "jpg",
-            "33": "jpg",
-            "34": "jpg",
-            "35": "webp",
-            "36": "jpg",
-            "39": "jpg",
-            "43": "jpg",
-            "45": "jpg",
-            "47": "jpg",
-            "49": "jpg",
-            "51": "jpg",
-            "52": "jpg",
-            "54": "jpg",
-            "56": "jpg",
-            "59": "jpg",
-            "61": "jpg",
-            "63": "jpg",
-            "65": "jpg",
-            "66": "jpg",
-            "68": "jpg",
-            "70": "jpg",
-            "72": "jpg",
-            "74": "jpg",
-            "76": "jpg",
-            "79": "jpg",
-            "81": "jpg",
-            "83": "jpg",
-            "85": "jpg",
-            "87": "jpg",
-            "89": "jpg",
-            "91": "jpg",
-            "92": "jpg",
-            "94": "png",
-            "95": "jpg",
-            "98": "jpg",
-            "100": "jpg",
-            "104": "jpg",
-            "106": "jpg",
-            "107": "jpg",
-            "108": "jpg",
-            "110": "jpg",
-            "112": "jpg",
-            "114": "jpg",
-            "117": "jpg",
-            "119": "webp",
-            "121": "png",
-            "122": "jpg",
-            "124": "jpg",
-            "126": "jpg",
-            "128": "jpg",
-            "130": "png",
-            "131": "jpg",
-            "133": "png",
-            "136": "jpg",
-            "138": "jpg",
-            "139": "jpg",
-            "141": "jpg",
-            "143": "jpg",
-            "145": "jpg",
-            "147": "jpg",
-            "148": "jpg",
-            "150": "jpg",
-            "152": "jpg",
-            "155": "jpg",
-            "157": "jpg",
-            "159": "jpg",
-            "161": "jpg",
-            "164": "jpg",
-            "166": "jpg",
-            "168": "jpg",
-            "171": "jpg",
-            "173": "jpg",
-            "176": "jpg",
-            "178": "jpg",
-            "181": "jpg",
-            "185": "png",
-            "186": "jpg",
-            "188": "jpg",
-            "190": "jpg",
-        };
-
-        // Dados dos produtos (categoria, nome)
-        const allProducts = [
-            { category: "2", name: "3/8\"-16 x 2-1/2\" Grade 5 Zinc Finish Hex Cap Screw" },
-            { category: "7", name: "Safety Glasses, Clear Lens, Anti-Fog, Wraparound" },
-            { category: "9", name: "Nitrile Disposable Gloves, Powder-Free, Large, 100/Box" },
-            { category: "12", name: "Glove Nitrile Disposable 7mil Black" },
-            { category: "14", name: "3M Peltor Optime 98 Earmuffs, NRR 25" },
-            { category: "16", name: "Hard Hat, Class E, White" },
-            { category: "18", name: "Safety Boot, Waterproof, Steel Toe" },
-            { category: "20", name: "Wire Mesh Strainer, 12 inch" },
-            { category: "23", name: "Electrical Cable Connector, Type A" },
-            { category: "24", name: "Screwdriver Set, 8 Piece Assorted" },
-            { category: "25", name: "Adjustable Wrench, 12 inch" },
-            { category: "27", name: "Locking Pliers, 10 inch Curved Jaw" },
-            { category: "28", name: "Measuring Tape, 25ft Magnetic" },
-            { category: "29", name: "Digital Caliper, 6 inch" },
-            { category: "30", name: "Claw Hammer, 16oz Fiberglass Handle" },
-            { category: "31", name: "Needle Nose Pliers, 5 inch" },
-            { category: "33", name: "Slip Joint Pliers, 8 inch" },
-            { category: "34", name: "Hacksaw Blade, 10 inch" },
-            { category: "35", name: "Reciprocating Saw Blade Set" },
-            { category: "36", name: "Circular Saw Blade, 7-1/4 inch" },
-            { category: "39", name: "Power Drill Driver, 20V Brushless" },
-            { category: "41", name: "Impact Driver, 1/4 inch Hex" },
-            { category: "43", name: "LED Shop Light, 4ft 5000K" },
-            { category: "45", name: "Rechargeable Flashlight, 1000 Lumens" },
-            { category: "47", name: "Work Light Stand, Adjustable" },
-            { category: "49", name: "Toggle Light Switch, 20A Heavy Duty" },
-            { category: "51", name: "Exit Sign LED, Emergency Light" },
-            { category: "52", name: "Outlet Plug Adapter, 3 Way" },
-            { category: "54", name: "Electrical Wire Connector, Assorted" },
-            { category: "56", name: "Terminal Block, 20A 600V" },
-            { category: "59", name: "GFCI Outlet, 20A Ground Fault" },
-            { category: "61", name: "Circuit Breaker, 20A Single Pole" },
-            { category: "63", name: "Fuse Block, 30A 250V" },
-            { category: "65", name: "Electrical Cable, 12AWG Copper" },
-            { category: "66", name: "Conduit Connector, 3/4 inch" },
-            { category: "68", name: "Electrical Box, 4 Square Shallow" },
-            { category: "70", name: "Outlet Box, 2 Gang Plastic" },
-            { category: "72", name: "PTFE Thread Sealant Tape, Yellow" },
-            { category: "74", name: "Pipe Insulation Foam Tube, 3/4\"" },
-            { category: "76", name: "Pipe Dope, PTFE Thread Sealant" },
-            { category: "79", name: "Copper Tubing, 3/4\" x 50ft" },
-            { category: "81", name: "PVC Pipe, 2\" x 10ft" },
-            { category: "83", name: "Flexible Hose, 1/2\" x 100ft" },
-            { category: "85", name: "Condensate Pump, 110V 1/8HP" },
-            { category: "87", name: "Duct Tape, 2\" x 60yd Silver" },
-            { category: "89", name: "Ductwork Elbow, 90 Degree" },
-            { category: "91", name: "Flex Duct, 8\" x 25ft Aluminum" },
-            { category: "92", name: "Variable Frequency Drive, 5HP" },
-            { category: "94", name: "Furnace Filter Rack, 20x25 Holder" },
-            { category: "95", name: "Manual Pallet Jack, 5500 lbs" },
-            { category: "98", name: "Hand Truck Dolly, Pneumatic Wheels" },
-            { category: "100", name: "Platform Truck, 4 Wheel" },
-            { category: "102", name: "Cargo Net, 6x8ft Heavy Duty" },
-            { category: "104", name: "Bungee Cord, 24\" Set of 4" },
-            { category: "106", name: "Ratchet Strap, 2\"x27ft 1333lb" },
-            { category: "107", name: "Rubber Bumper, 4\" x 4\" x 4\"" },
-            { category: "108", name: "Bolt Assortment, Grade 5 Hex" },
-            { category: "110", name: "Screw Assortment, Wood Phillips" },
-            { category: "112", name: "Nail Assortment, Galvanized" },
-            { category: "114", name: "Washer Assortment, Stainless" },
-            { category: "117", name: "Cotter Pin Assortment, Steel" },
-            { category: "119", name: "O-Ring Assortment, Rubber" },
-            { category: "121", name: "Retaining Ring Pliers Set, 4 Piece" },
-            { category: "122", name: "Snap Ring Pliers, Internal External" },
-            { category: "124", name: "Wire Stripper, Automatic" },
-            { category: "126", name: "Microfiber Cleaning Cloths, Set of 6" },
-            { category: "128", name: "Mop Bucket with Wringer, 36 Quart" },
-            { category: "130", name: "Trash Bags, 55-60 Gal Heavy Duty" },
-            { category: "131", name: "Disinfectant Spray, 19 oz Lysol" },
-            { category: "133", name: "Floor Cleaner, 1 Gallon Concentrate" },
-            { category: "136", name: "Cleaning Pad, Red Scrubbing" },
-            { category: "138", name: "Broom, Push Bristle" },
-            { category: "139", name: "Dust Pan, Commercial Plastic" },
-            { category: "141", name: "Replacement Motor, 1/2HP 1725RPM" },
-            { category: "143", name: "Electric Motor, 1/4HP Drip Proof" },
-            { category: "145", name: "Motor Pulley, 2\" Bore" },
-            { category: "147", name: "Pillow Block Bearing, 1\" Shaft" },
-            { category: "148", name: "Ball Bearing, 6205 Double Shielded" },
-            { category: "150", name: "V-Belt, A-Section 1/2\" Wide" },
-            { category: "152", name: "Chain Drive, #40 Roller" },
-            { category: "155", name: "Shaft Coupling, Flex 1-1/2\"" },
-            { category: "157", name: "LED Bulb, A19 60W Equivalent" },
-            { category: "159", name: "Lamp Socket, Medium Base" },
-            { category: "161", name: "Grinding Wheel, 4-1/2\" Depressed" },
-            { category: "164", name: "Wire Brush Wheel, Cup 4\"" },
-            { category: "166", name: "Cutting Wheel, Thin 4-1/2\"" },
-            { category: "168", name: "Spray Adhesive, 13.5 oz Multi" },
-            { category: "171", name: "Silicone Sealant, 10.1oz Clear" },
-            { category: "173", name: "Penetrating Oil, 11 oz CRC" },
-            { category: "176", name: "Electrical LOTO Kit, Complete" },
-            { category: "178", name: "Safety Lockout Hasp, 1\"" },
-            { category: "181", name: "Padlock, Keyed Alike Set 4" },
-            { category: "183", name: "Grinder Safety Wheel, 4-1/2\"" },
-            { category: "185", name: "Abrasive Cut-Off Wheel, 3\"" },
-            { category: "186", name: "Buffing Wheel, Soft Cotton" },
-            { category: "188", name: "Work Gloves, Leather Palm" },
-            { category: "190", name: "Welding Helmet, Auto Darkening" },
-        ];
-
-        // Filtrar apenas produtos que têm imagens
-        const products = allProducts.filter(p => IMAGE_EXTENSIONS[p.category]);
-
+        // Fonte única dos dados: catalog.json (ver CLAUDE.md)
         const gallery = document.getElementById('gallery');
         const filterInput = document.getElementById('categoryFilter');
         const noResults = document.getElementById('noResults');
+
+        let products = [];
 
         function showToast(message) {
             const toast = document.createElement('div');
@@ -477,6 +280,46 @@
             });
         }
 
+        function el(tag, className, text) {
+            const node = document.createElement(tag);
+            if (className) node.className = className;
+            if (text !== undefined) node.textContent = text;
+            return node;
+        }
+
+        function createCard(product) {
+            const card = el('div', 'card');
+
+            const imageWrapper = el('div', 'card-image-wrapper');
+            if (product.image) {
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.name;
+                imageWrapper.appendChild(img);
+            } else {
+                imageWrapper.appendChild(el('span', 'pending-msg', 'Imagem pendente'));
+            }
+
+            const content = el('div', 'card-content');
+            content.appendChild(el('span', 'card-category', `Cat ${product.category}`));
+            content.appendChild(el('div', 'card-title', product.name));
+
+            if (product.image) {
+                const footer = el('div', 'card-footer');
+                const view = el('a', 'card-footer-label', 'VER');
+                view.href = product.image;
+                view.target = '_blank';
+                const copy = el('button', 'card-footer-label', 'COPIAR');
+                const fullUrl = new URL(product.image, window.location.href).href;
+                copy.addEventListener('click', () => copyToClipboard(fullUrl, copy));
+                footer.append(view, copy);
+                content.appendChild(footer);
+            }
+
+            card.append(imageWrapper, content);
+            return card;
+        }
+
         function renderGallery(filteredProducts) {
             gallery.innerHTML = '';
 
@@ -490,44 +333,9 @@
             noResults.style.display = 'none';
 
             // Ordenar por categoria crescente
-            const sorted = [...filteredProducts].sort((a, b) => parseInt(a.category) - parseInt(b.category));
-
-            sorted.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'card';
-
-                const ext = IMAGE_EXTENSIONS[product.category];
-                const imgPath = `images/img_${product.category}.${ext}`;
-
-                const fullUrl = new URL(imgPath, window.location.href).href;
-
-                card.innerHTML = `
-                    <div class="card-image-wrapper">
-                        <img
-                            src="${imgPath}"
-                            alt="${product.name}"
-                        >
-                    </div>
-                    <div class="card-content">
-                        <span class="card-category">Cat ${product.category}</span>
-                        <div class="card-title">${product.name}</div>
-                        <div class="card-footer">
-                            <a href="${imgPath}" target="_blank" class="card-footer-label">VER</a>
-                            <button class="card-footer-label" data-url="${fullUrl}">COPIAR</button>
-                        </div>
-                    </div>
-                `;
-
-                gallery.appendChild(card);
-
-                // Adicionar evento de cópia
-                const copyBtn = card.querySelector('.card-footer-label[data-url]');
-                copyBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const url = copyBtn.getAttribute('data-url');
-                    copyToClipboard(url, copyBtn);
-                });
-            });
+            [...filteredProducts]
+                .sort((a, b) => a.category - b.category)
+                .forEach(product => gallery.appendChild(createCard(product)));
         }
 
         function filterByCategory() {
@@ -538,18 +346,25 @@
                 return;
             }
 
-            const filtered = products.filter(product =>
-                product.category === searchTerm
-            );
-
-            renderGallery(filtered);
+            renderGallery(products.filter(product => String(product.category) === searchTerm));
         }
 
-        // Event listeners
         filterInput.addEventListener('input', filterByCategory);
 
-        // Render inicial
-        renderGallery(products);
+        fetch('catalog.json')
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                products = data;
+                renderGallery(products);
+            })
+            .catch(error => {
+                gallery.style.display = 'none';
+                noResults.textContent = `Erro ao carregar catalog.json (${error.message}). Se abriu o arquivo direto, use um servidor local.`;
+                noResults.style.display = 'block';
+            });
     </script>
 </body>
 </html>
