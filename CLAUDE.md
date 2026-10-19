@@ -15,8 +15,9 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 
 - Nunca commitar direto na `main`: criar branch, abrir PR e validar no Deploy Preview do Netlify.
 - Rodar localmente: `python3 -m http.server 8000` e abrir http://localhost:8000
-- Ao trocar uma imagem por outra de extensão diferente, atualizar o campo `image` do produto
-  em `index.html` (e remover o arquivo antigo de `images/`).
+- Todas as imagens de `images/` devem ser `.jpg` (conteúdo JPEG de verdade, não só a extensão), mantendo o nome
+  `img_<categoria>.jpg`. Converter webp/png/gif antes de adicionar (achatar transparência sobre fundo branco).
+  Assim o campo `image` do `index.html` não precisa mudar ao trocar uma imagem.
 - Manter apenas `index.html` e `images/` como conteúdo do site: sem scripts auxiliares nem dados em arquivos separados.
 
 ## Convenções
