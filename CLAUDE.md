@@ -5,30 +5,27 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 
 ## Estrutura
 
-- `catalog.json` — **fonte única dos dados**. Lista de `{ category, name, sourceUrl, image }`.
-  `image` é o caminho local (`images/img_<categoria>.<ext>`) ou `null` se ainda não foi baixada.
-- `index.html` — galeria (HTML/CSS/JS puro, sem build). Carrega `catalog.json` via `fetch`.
-- `images/` — imagens locais, nomeadas por categoria.
-- `download_images.py` — baixa para `images/` o que falta no catálogo e atualiza o `catalog.json`.
+- `index.html` — galeria (HTML/CSS/JS puro, sem build). Contém a relação dos produtos no array
+  `products` (`{ category, name, image }`), usado para a pesquisa por categoria.
+  `image` é o caminho (`images/img_<categoria>.<ext>`) ou `null` se a imagem está pendente.
+- `images/` — imagens, nomeadas por categoria. As imagens são trocadas direto nessa pasta.
 - `netlify.toml` — publica a raiz, define cache e `noindex`.
 
 ## Como trabalhar
 
 - Nunca commitar direto na `main`: criar branch, abrir PR e validar no Deploy Preview do Netlify.
-- Rodar localmente (o `fetch` não funciona via `file://`):
-  `python3 -m http.server 8000` e abrir http://localhost:8000
-- Para adicionar/alterar uma categoria: editar só o `catalog.json` (e rodar `download_images.py`).
-  Não duplicar dados no HTML nem no script.
-- `catalog.json` é formatado com 2 espaços e termina com newline.
+- Rodar localmente: `python3 -m http.server 8000` e abrir http://localhost:8000
+- Ao trocar uma imagem por outra de extensão diferente, atualizar o campo `image` do produto
+  em `index.html` (e remover o arquivo antigo de `images/`).
+- Manter apenas `index.html` e `images/` como conteúdo do site: sem scripts auxiliares nem dados em arquivos separados.
 
 ## Convenções
 
-- Sem dependências nem build: manter HTML/JS/Python da biblioteca padrão.
+- Sem dependências nem build.
 - Textos da interface em português (pt-BR).
 - Montar o DOM com `textContent`/`createElement` (nomes de produto contêm aspas, ex.: `3/8"-16`).
-- Baixar imagens de terceiros só quando o usuário pedir; o site é interno e não deve ser indexado.
+- O site é interno e não deve ser indexado.
 
 ## Pendências conhecidas
 
-- Categorias 41, 102 e 183 estão sem imagem local (`image: null`); a galeria mostra "Imagem pendente".
-- Categoria 155 tinha duas URLs na lista original; o catálogo guarda a segunda (a que o script antigo deixava prevalecer).
+- Categorias 41, 102 e 183 estão sem imagem (`image: null`); a galeria mostra "Imagem pendente".
