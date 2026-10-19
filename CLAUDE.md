@@ -6,7 +6,8 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 ## Estrutura
 
 - `index.html` — galeria (HTML/CSS/JS puro, sem build). Contém a relação dos produtos no array
-  `products` (`{ category, name, image }`), usado para a pesquisa por categoria.
+  `products` (`{ category, name, path, image }`), usado para a pesquisa por categoria.
+  `name` e `path` vêm da árvore de categorias da VTEX (fonte da verdade, conta `demoindsupply`).
   `image` é o caminho (`images/img_<categoria>.<ext>`) ou `null` se a imagem está pendente.
 - `images/` — imagens, nomeadas por categoria. As imagens são trocadas direto nessa pasta.
 - `netlify.toml` — publica a raiz, define cache e `noindex`.
@@ -19,6 +20,14 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
   `img_<categoria>.jpg`. Converter webp/png/gif antes de adicionar (achatar transparência sobre fundo branco).
   Assim o campo `image` do `index.html` não precisa mudar ao trocar uma imagem.
 - Manter apenas `index.html` e `images/` como conteúdo do site: sem scripts auxiliares nem dados em arquivos separados.
+
+## Nomes das categorias (VTEX)
+
+- O `category` é o ID da categoria na VTEX. `name` é o nome da categoria e `path` o caminho completo (ex.: `Safety > Eye Protection > Safety Glasses`).
+- API pública (somente leitura, sem autenticação):
+  `GET https://demoindsupply.vtexcommercestable.com.br/api/catalog_system/pub/category/tree/5`
+- Ao mudar de conta ou se a árvore mudar, refazer `name`/`path` a partir dessa API; não editar nomes à mão.
+- A imagem de cada categoria deve representar a categoria da VTEX (o nome mostrado), não outro produto.
 
 ## Convenções
 
@@ -37,4 +46,5 @@ Publicada no Netlify: https://validacao-imagens-catalogo.netlify.app/ (deploy au
 
 ## Pendências conhecidas
 
-- Categorias 41, 102 e 183 estão sem imagem (`image: null`); a galeria mostra "Imagem pendente".
+- A galeria lista as 190 categorias da VTEX (inclusive as de topo e intermediárias). Só 95 têm imagem; as demais (`image: null`) aparecem como "Pending image".
+- Muitas imagens atuais foram feitas para os nomes antigos e podem não representar a categoria da VTEX; revisar uma a uma.
